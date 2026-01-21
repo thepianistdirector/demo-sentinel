@@ -1,8 +1,6 @@
-import { useState } from 'react'
-import { makeStyles, Button, Dropdown, Option, Input, Badge } from '@fluentui/react-components'
+import { makeStyles, Button, Dropdown, Option, Input } from '@fluentui/react-components'
 import {
   Search24Regular,
-  Filter24Regular,
   ArrowSync24Regular,
 } from '@fluentui/react-icons'
 
