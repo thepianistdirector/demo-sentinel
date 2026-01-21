@@ -1,0 +1,92 @@
+diff --git a/ai/decisions.md b/ai/decisions.md
+index bb72919..20c9396 100644
+--- a/ai/decisions.md
++++ b/ai/decisions.md
+@@ -28,3 +28,35 @@
+ - Use git hooks to detect changes (rejected: adds dependencies)
+ 
+ **Files:** `~/.local/share/claude-code/scripts/ai/delegate*.sh`
++
++---
++
++## 2026-01-21: Verification Refinements
++
++**Context:** Initial verification implementation had false positives due to:
++1. Delegation artifacts being counted as "work"
++2. Jules preflight commits being counted as "work"
++3. BEFORE snapshot being taken once instead of per-engine
++
++**Decision:** Implement multi-layer verification with specific exclusions.
++
++**Changes:**
++1. BEFORE snapshot taken immediately before EACH engine runs
++2. Preflight commits (message contains "preflight") explicitly excluded from work detection
++3. Directories excluded from status comparison:
++   - `ai/delegations/`
++   - `ai/reviews/`
++   - `ai/work/*/delegations/`
++   - Current delegation directory
++4. File count comparison instead of raw string comparison
++
++**Tradeoffs:**
++- (+) No more false positives from preflight commits or artifacts
++- (+) Each engine evaluated independently against its own baseline
++- (-) Slightly more complex verification logic
++- (-) Preflight commits always ignored (can't use them as work indicator)
++
++**Verification Criteria:**
++- New non-preflight commit created
++- More files in working tree (outside excluded dirs)
++- Different files in status (actual new content)
+diff --git a/ai/work/demo-sentinel/delegations/20260121-201957/_tooling/github-preflight.stderr.log b/ai/work/demo-sentinel/delegations/20260121-201957/_tooling/github-preflight.stderr.log
+index 9499418..ffabc6e 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-201957/_tooling/github-preflight.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-201957/_tooling/github-preflight.stderr.log
+@@ -3,3 +3,6 @@
+ [preflight] Origin already set to GitHub: https://github.com/thepianistdirector/demo-sentinel.git
+ [preflight] Warning: current branch (master) != ACTIVE_BRANCH (main)
+ [preflight] Staging 36 files for preflight commit
++[preflight] Pushed branch master to origin
++[preflight] Report written to /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-201957/_tooling/github-preflight.json
++[preflight] Preflight complete
+diff --git a/ai/work/demo-sentinel/delegations/20260121-201957/_tooling/github-preflight.stdout.log b/ai/work/demo-sentinel/delegations/20260121-201957/_tooling/github-preflight.stdout.log
+index e69de29..c51e2b3 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-201957/_tooling/github-preflight.stdout.log
++++ b/ai/work/demo-sentinel/delegations/20260121-201957/_tooling/github-preflight.stdout.log
+@@ -0,0 +1,12 @@
++{
++  "timestamp": "2026-01-21T20:19:57.895655+00:00",
++  "errors": [],
++  "git_root": "/home/lucas/code/demo-sentinel",
++  "owner": "thepianistdirector",
++  "repo": "demo-sentinel",
++  "original_origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "branch": "master",
++  "preflight_commit": "bd0a4bed2f9ecd3cd8cab79910900149977b5d99",
++  "pushed": true
++}
+diff --git a/ai/work/demo-sentinel/delegations/20260121-201957/jules.stderr.log b/ai/work/demo-sentinel/delegations/20260121-201957/jules.stderr.log
+index 2d014c1..c7f4c5b 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-201957/jules.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-201957/jules.stderr.log
+@@ -1,2 +1,19 @@
+ [jules] Found preflight script at global path
+ [jules] Running GitHub preflight: /home/lucas/.local/share/claude-code/scripts/ai/jules_preflight_github.py
++[jules] GitHub preflight succeeded
++[jules] Capturing Jules CLI help...
++[jules] Using repo: thepianistdirector/demo-sentinel
++[jules] Starting Jules remote session...
++[jules] Trying: echo prompt | jules remote new --repo thepianistdirector/demo-sentinel
++[jules] Session ID: is
++[jules] Starting pull loop (timeout: 900s, interval: 30s)
++[jules] Pull attempt 1 (0s elapsed)...
++[jules] Jules pull reported error: Error: api error: status 404, content: {
++  "error": {
++    "code": 404,
++    "message": "Requested entity was not found.",
++    "status": "NOT_FOUND"
++  }
++}
++[jules] Changes detected outside delegation dir after pull
++[jules] Jules delegation complete
