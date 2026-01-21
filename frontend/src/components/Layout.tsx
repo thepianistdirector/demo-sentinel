@@ -1,13 +1,15 @@
-import { makeStyles, Menu, MenuTrigger, MenuPopover, MenuList, MenuItem } from '@fluentui/react-components'
+import { makeStyles, Menu, MenuTrigger, MenuPopover, MenuList, MenuItem, Dropdown, Option } from '@fluentui/react-components'
 import {
   Alert24Regular,
   Settings24Regular,
   Person24Regular,
   SignOut24Regular,
+  Database24Regular,
 } from '@fluentui/react-icons'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { Sidebar } from './Sidebar'
 import { useAuth } from '../contexts/AuthContext'
+import { useData } from '../contexts/DataContext'
 
 const useStyles = makeStyles({
   root: {
@@ -103,9 +105,19 @@ const useStyles = makeStyles({
     backgroundColor: '#252423',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingLeft: '16px',
     paddingRight: '16px',
     borderBottom: '1px solid #323130',
+  },
+  subHeaderLeft: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+  },
+  subHeaderRight: {
+    display: 'flex',
+    alignItems: 'center',
     gap: '12px',
   },
   sentinelIcon: {
@@ -132,6 +144,18 @@ const useStyles = makeStyles({
   breadcrumbSeparator: {
     color: '#605e5c',
   },
+  dataSetSelector: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  dataSetLabel: {
+    fontSize: '12px',
+    color: '#a19f9d',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+  },
   body: {
     display: 'flex',
     flex: 1,
@@ -149,10 +173,17 @@ export function Layout() {
   const styles = useStyles()
   const navigate = useNavigate()
   const { user, logout } = useAuth()
+  const { currentDataSetId, availableDataSets, canSwitchDataSet, switchDataSet } = useData()
 
   const handleLogout = () => {
     logout()
     navigate('/login')
+  }
+
+  const handleDataSetChange = (_: unknown, data: { optionValue?: string }) => {
+    if (data.optionValue) {
+      switchDataSet(data.optionValue)
+    }
   }
 
   return (
@@ -213,16 +244,41 @@ export function Layout() {
 
       {/* Sentinel Sub-Header */}
       <div className={styles.subHeader}>
-        <div className={styles.sentinelIcon}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
-            <path d="M8 1L2 4v4c0 3.5 2.5 6.5 6 7.5 3.5-1 6-4 6-7.5V4L8 1zm0 2l4 2v3c0 2.5-1.8 4.7-4 5.5-2.2-.8-4-3-4-5.5V5l4-2z"/>
-          </svg>
+        <div className={styles.subHeaderLeft}>
+          <div className={styles.sentinelIcon}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+              <path d="M8 1L2 4v4c0 3.5 2.5 6.5 6 7.5 3.5-1 6-4 6-7.5V4L8 1zm0 2l4 2v3c0 2.5-1.8 4.7-4 5.5-2.2-.8-4-3-4-5.5V5l4-2z"/>
+            </svg>
+          </div>
+          <span className={styles.sentinelTitle}>Microsoft Sentinel</span>
+          <div className={styles.breadcrumb}>
+            <span className={styles.breadcrumbSeparator}>|</span>
+            <span>Demo-Workspace</span>
+          </div>
         </div>
-        <span className={styles.sentinelTitle}>Microsoft Sentinel</span>
-        <div className={styles.breadcrumb}>
-          <span className={styles.breadcrumbSeparator}>|</span>
-          <span>Demo-Workspace</span>
-        </div>
+
+        {canSwitchDataSet && (
+          <div className={styles.subHeaderRight}>
+            <div className={styles.dataSetSelector}>
+              <span className={styles.dataSetLabel}>
+                <Database24Regular />
+                Data Set:
+              </span>
+              <Dropdown
+                value={currentDataSetId || ''}
+                selectedOptions={currentDataSetId ? [currentDataSetId] : []}
+                onOptionSelect={handleDataSetChange}
+                style={{ minWidth: '180px' }}
+              >
+                {availableDataSets.map((ds) => (
+                  <Option key={ds.id} value={ds.id}>
+                    {ds.name}
+                  </Option>
+                ))}
+              </Dropdown>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Main Body */}

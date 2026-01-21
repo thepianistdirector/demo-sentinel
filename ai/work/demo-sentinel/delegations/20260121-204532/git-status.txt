@@ -1,0 +1,34 @@
+ M ai/reviews/command-log.jsonl
+ M ai/tasks.md
+ M ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stderr.log
+ M ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stdout.log
+ M ai/work/demo-sentinel/delegations/20260121-204532/jules.stderr.log
+ M frontend/src/components/Layout.tsx
+ M frontend/src/main.tsx
+ M frontend/src/pages/Overview.tsx
+?? ai/work/demo-sentinel/delegations/20260121-204532/_tooling/codex-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/_tooling/gemini-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.json
+?? ai/work/demo-sentinel/delegations/20260121-204532/_tooling/jules-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/_tooling/jules-new-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/_tooling/jules-remote-pull-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/changed-files.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/codex-git-hash-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/codex-git-status-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/codex.attempt.log
+?? ai/work/demo-sentinel/delegations/20260121-204532/codex.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-204532/codex.stdout.log
+?? ai/work/demo-sentinel/delegations/20260121-204532/gemini-changes.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/gemini-git-hash-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/gemini-git-status-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/gemini.attempt.log
+?? ai/work/demo-sentinel/delegations/20260121-204532/gemini.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-204532/gemini.stdout.log
+?? ai/work/demo-sentinel/delegations/20260121-204532/git-status.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/handoff-summary.md
+?? ai/work/demo-sentinel/delegations/20260121-204532/jules-new.log
+?? ai/work/demo-sentinel/delegations/20260121-204532/jules-pull.log
+?? ai/work/demo-sentinel/delegations/20260121-204532/jules-timeout.txt
+?? ai/work/demo-sentinel/delegations/20260121-204532/jules.session_id
+?? ai/work/demo-sentinel/delegations/20260121-204532/patch.diff
+?? ai/work/demo-sentinel/delegations/20260121-204532/selected-engine.txt

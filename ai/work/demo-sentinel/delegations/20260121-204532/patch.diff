@@ -1,0 +1,339 @@
+diff --git a/ai/reviews/command-log.jsonl b/ai/reviews/command-log.jsonl
+index f9867e9..16da07d 100644
+--- a/ai/reviews/command-log.jsonl
++++ b/ai/reviews/command-log.jsonl
+@@ -95,3 +95,32 @@
+ {"ts": "2026-01-21T20:33:23Z", "cmd": "git diff --cached --no-color -- frontend/ > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-202844/patch.diff 2>&1 && echo \"Patch written successfully\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+ {"ts": "2026-01-21T20:34:04Z", "cmd": "TIMESTAMP=$(date +%Y%m%d-%H%M%S) && mkdir -p \"/home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/${TIMESTAMP}\" && echo \"$TIMESTAMP\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+ {"ts": "2026-01-21T20:34:32Z", "cmd": "cat > ~/.local/share/claude-code/scripts/ai/CHANGELOG.md << 'EOF'\n# Delegation Scripts Changelog\n\n## 2026-01-21: Major Verification Overhaul\n\n### Problem\nThe `/delegate` command was failing to properl", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:34:53Z", "cmd": "cat > ~/.local/share/claude-code/scripts/ai/README.md << 'EOF'\n# AI Delegation Scripts\n\nGlobal scripts for delegating work to external AI engines.\n\n## Location\n\n```\n~/.local/share/claude-code/scripts/", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:35:25Z", "cmd": "JULES_PULL_TIMEOUT_SECS=180 JULES_PULL_INTERVAL=20 ~/.local/share/claude-code/scripts/ai/delegate.sh jules-loading-test /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/jules-test-brie", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:36:01Z", "cmd": "sleep 30 && tail -20 /tmp/claude/-home-lucas-code-demo-sentinel/tasks/ba229da.output", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:38:59Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh demo-sentinel /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegation-brief-phase4.md 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:39:11Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/frontend/src/types /home/lucas/code/demo-sentinel/frontend/src/data", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:39:25Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-203525", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:39:40Z", "cmd": "cat > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-203525/handoff-summary.md << 'EOF'\n# Handoff Summary\n\n- Engine: claude_code\n- Delegation dir: /home/lucas/code/demo-sent", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:40:22Z", "cmd": "sleep 60 && tail -30 /tmp/claude/-home-lucas-code-demo-sentinel/tasks/ba229da.output", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:02Z", "cmd": "jules --help 2>&1 | head -30", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:04Z", "cmd": "codex --help 2>&1 | head -30", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:16Z", "cmd": "jules new --help 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:17Z", "cmd": "cat ~/.gemini/settings.json 2>/dev/null || echo \"No settings.json found\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:25Z", "cmd": "ls -la ~/.gemini/ 2>/dev/null", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:26Z", "cmd": "cat ~/.gemini/extensions/*/config.json 2>/dev/null | head -50 || echo \"No extension configs\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:33Z", "cmd": "cat ~/.gemini/policies/* 2>/dev/null || echo \"No policy files\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:38Z", "cmd": "gemini --help 2>&1 | head -40", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:44:28Z", "cmd": "cat > /tmp/delegate_jules_v2.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\n# Jules Delegation Script\n# Uses 'jules new' command with pull workflow\n\nROOT=\"$(git rev-parse --show-toplevel 2>/dev", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:44:59Z", "cmd": "cat > /tmp/delegate_gemini_v2.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\nROOT=\"$(git rev-parse --show-toplevel 2>/dev/null || pwd)\"\nDELEG_DIR=\"${AI_DELEGATION_DIR:?AI_DELEGATION_DIR not set", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:45:17Z", "cmd": "cat >> ~/.local/share/claude-code/scripts/ai/CHANGELOG.md << 'EOF'\n\n---\n\n## 2026-01-21: Engine Command Fixes\n\n### Problem\nExternal engines were failing due to:\n1. Jules using deprecated `jules remote ", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:45:32Z", "cmd": "JULES_PULL_TIMEOUT_SECS=120 JULES_PULL_INTERVAL=20 ~/.local/share/claude-code/scripts/ai/delegate.sh test-all-fixes /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/jules-test-brief.md", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:45:45Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-204532 && cat > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-204532/handoff-summary.md <", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:45:59Z", "cmd": "echo \"# Changed files\" > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-204532/changed-files.txt && echo \"# Patch\" > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/del", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:46:23Z", "cmd": "sleep 45 && tail -30 /tmp/claude/-home-lucas-code-demo-sentinel/tasks/b05e002.output", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:47:30Z", "cmd": "sleep 60 && cat /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-204532/jules.stderr.log 2>/dev/null || echo \"Jules still running...\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:48:09Z", "cmd": "cd /home/lucas/code/demo-sentinel/frontend && grep -r \"OptionOnSelectData\" node_modules/@fluentui --include=\"*.d.ts\" | head -20", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:48:12Z", "cmd": "grep -A 10 \"export declare type OptionOnSelectData\" node_modules/@fluentui/react-combobox/dist/index.d.ts", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:48:35Z", "cmd": "npm run build 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:48:44Z", "cmd": "cd /home/lucas/code/demo-sentinel && git diff --name-only HEAD 2>/dev/null || find frontend/src -name \"*.ts\" -o -name \"*.tsx\" | head -50", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:49:40Z", "cmd": "TIMESTAMP=$(date +%Y%m%d-%H%M%S) && mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/$TIMESTAMP && echo $TIMESTAMP", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+diff --git a/ai/tasks.md b/ai/tasks.md
+index 2ad1062..38ff686 100644
+--- a/ai/tasks.md
++++ b/ai/tasks.md
+@@ -38,7 +38,7 @@ ACTIVE_UPDATED_AT: 2026-01-21
+ - [x] Phase 1: Project Setup (React + TypeScript + Vite + Fluent UI)
+ - [x] Phase 2: Core UI Components (Layout, Sidebar, Navigation)
+ - [x] Phase 3: Authentication
+-- [ ] Phase 4: Data Management
++- [x] Phase 4: Data Management
+ - [ ] Phase 5: KQL Engine
+ - [x] Phase 6: Sentinel Pages (All pages created with mock data)
+ - [ ] Phase 7: Infrastructure
+@@ -60,6 +60,15 @@ ACTIVE_UPDATED_AT: 2026-01-21
+ - Mock credentials: admin@demo.com/admin123, client@demo.com/client123
+ - Build passes with zero TypeScript errors
+ 
++**Phase 4 Completed:**
++- TypeScript data types (SecurityEvent, Incident, Alert, DataConnector, DataSet)
++- Healthcare mock data set (50 events, 10 incidents, 20 alerts, 7 connectors)
++- Financial mock data set (50 events, 10 incidents, 20 alerts, 8 connectors)
++- DataContext with role-based data access (admin sees all, client sees assigned)
++- Updated Overview, Incidents, Logs pages to use DataContext
++- Admin data set switcher dropdown in header
++- Build passes with zero TypeScript errors
++
+ ---
+ 
+ ### delegation-investigation
+diff --git a/ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stderr.log b/ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stderr.log
+index 9e502a7..7da3336 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stderr.log
+@@ -3,3 +3,6 @@
+ [preflight] Origin already set to GitHub: https://github.com/thepianistdirector/demo-sentinel.git
+ [preflight] Warning: current branch (master) != ACTIVE_BRANCH (main)
+ [preflight] Staging 63 files for preflight commit
++[preflight] Pushed branch master to origin
++[preflight] Report written to /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.json
++[preflight] Preflight complete
+diff --git a/ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stdout.log b/ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stdout.log
+index e69de29..2504d79 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stdout.log
++++ b/ai/work/demo-sentinel/delegations/20260121-204532/_tooling/github-preflight.stdout.log
+@@ -0,0 +1,12 @@
++{
++  "timestamp": "2026-01-21T20:45:32.349096+00:00",
++  "errors": [],
++  "git_root": "/home/lucas/code/demo-sentinel",
++  "owner": "thepianistdirector",
++  "repo": "demo-sentinel",
++  "original_origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "branch": "master",
++  "preflight_commit": "bd3a0fd9d49f3051398caacfc564b10f734b786c",
++  "pushed": true
++}
+diff --git a/ai/work/demo-sentinel/delegations/20260121-204532/jules.stderr.log b/ai/work/demo-sentinel/delegations/20260121-204532/jules.stderr.log
+index 2d014c1..6b96b2c 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-204532/jules.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-204532/jules.stderr.log
+@@ -1,2 +1,31 @@
+ [jules] Found preflight script at global path
+ [jules] Running GitHub preflight: /home/lucas/.local/share/claude-code/scripts/ai/jules_preflight_github.py
++[jules] GitHub preflight succeeded
++[jules] Capturing Jules CLI help...
++[jules] Using repo: thepianistdirector/demo-sentinel
++[jules] Creating Jules session...
++[jules] Command: cat brief.md | jules new --repo thepianistdirector/demo-sentinel
++[jules] Session created despite warnings
++[jules] Session ID: 7028347387819491945
++[jules] Session URL: https://jules.google.com/session/7028347387819491945
++[jules] Starting pull loop (timeout: 120s, interval: 20s)
++[jules] Monitor progress at: https://jules.google.com/session/7028347387819491945
++[jules] Pull attempt 1 (0s elapsed)...
++[jules] Session not ready yet (404)
++[jules] Waiting 20s before next pull...
++[jules] Pull attempt 2 (22s elapsed)...
++[jules] Jules completed but made no changes
++[jules] Waiting 20s before next pull...
++[jules] Pull attempt 3 (44s elapsed)...
++[jules] Jules completed but made no changes
++[jules] Waiting 20s before next pull...
++[jules] Pull attempt 4 (66s elapsed)...
++[jules] Jules completed but made no changes
++[jules] Waiting 20s before next pull...
++[jules] Pull attempt 5 (88s elapsed)...
++[jules] Jules completed but made no changes
++[jules] Waiting 20s before next pull...
++[jules] Pull attempt 6 (109s elapsed)...
++[jules] Jules completed but made no changes
++[jules] Waiting 20s before next pull...
++[jules] Timeout reached after 131s
+diff --git a/frontend/src/components/Layout.tsx b/frontend/src/components/Layout.tsx
+index 0781ab8..9a2d2f7 100644
+--- a/frontend/src/components/Layout.tsx
++++ b/frontend/src/components/Layout.tsx
+@@ -1,13 +1,15 @@
+-import { makeStyles, Menu, MenuTrigger, MenuPopover, MenuList, MenuItem } from '@fluentui/react-components'
++import { makeStyles, Menu, MenuTrigger, MenuPopover, MenuList, MenuItem, Dropdown, Option } from '@fluentui/react-components'
+ import {
+   Alert24Regular,
+   Settings24Regular,
+   Person24Regular,
+   SignOut24Regular,
++  Database24Regular,
+ } from '@fluentui/react-icons'
+ import { Outlet, useNavigate } from 'react-router-dom'
+ import { Sidebar } from './Sidebar'
+ import { useAuth } from '../contexts/AuthContext'
++import { useData } from '../contexts/DataContext'
+ 
+ const useStyles = makeStyles({
+   root: {
+@@ -103,9 +105,19 @@ const useStyles = makeStyles({
+     backgroundColor: '#252423',
+     display: 'flex',
+     alignItems: 'center',
++    justifyContent: 'space-between',
+     paddingLeft: '16px',
+     paddingRight: '16px',
+     borderBottom: '1px solid #323130',
++  },
++  subHeaderLeft: {
++    display: 'flex',
++    alignItems: 'center',
++    gap: '12px',
++  },
++  subHeaderRight: {
++    display: 'flex',
++    alignItems: 'center',
+     gap: '12px',
+   },
+   sentinelIcon: {
+@@ -132,6 +144,18 @@ const useStyles = makeStyles({
+   breadcrumbSeparator: {
+     color: '#605e5c',
+   },
++  dataSetSelector: {
++    display: 'flex',
++    alignItems: 'center',
++    gap: '8px',
++  },
++  dataSetLabel: {
++    fontSize: '12px',
++    color: '#a19f9d',
++    display: 'flex',
++    alignItems: 'center',
++    gap: '4px',
++  },
+   body: {
+     display: 'flex',
+     flex: 1,
+@@ -149,12 +173,19 @@ export function Layout() {
+   const styles = useStyles()
+   const navigate = useNavigate()
+   const { user, logout } = useAuth()
++  const { currentDataSetId, availableDataSets, canSwitchDataSet, switchDataSet } = useData()
+ 
+   const handleLogout = () => {
+     logout()
+     navigate('/login')
+   }
+ 
++  const handleDataSetChange = (_: unknown, data: { optionValue?: string }) => {
++    if (data.optionValue) {
++      switchDataSet(data.optionValue)
++    }
++  }
++
+   return (
+     <div className={styles.root}>
+       {/* Azure Portal Top Header */}
+@@ -213,16 +244,41 @@ export function Layout() {
+ 
+       {/* Sentinel Sub-Header */}
+       <div className={styles.subHeader}>
+-        <div className={styles.sentinelIcon}>
+-          <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+-            <path d="M8 1L2 4v4c0 3.5 2.5 6.5 6 7.5 3.5-1 6-4 6-7.5V4L8 1zm0 2l4 2v3c0 2.5-1.8 4.7-4 5.5-2.2-.8-4-3-4-5.5V5l4-2z"/>
+-          </svg>
+-        </div>
+-        <span className={styles.sentinelTitle}>Microsoft Sentinel</span>
+-        <div className={styles.breadcrumb}>
+-          <span className={styles.breadcrumbSeparator}>|</span>
+-          <span>Demo-Workspace</span>
++        <div className={styles.subHeaderLeft}>
++          <div className={styles.sentinelIcon}>
++            <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
++              <path d="M8 1L2 4v4c0 3.5 2.5 6.5 6 7.5 3.5-1 6-4 6-7.5V4L8 1zm0 2l4 2v3c0 2.5-1.8 4.7-4 5.5-2.2-.8-4-3-4-5.5V5l4-2z"/>
++            </svg>
++          </div>
++          <span className={styles.sentinelTitle}>Microsoft Sentinel</span>
++          <div className={styles.breadcrumb}>
++            <span className={styles.breadcrumbSeparator}>|</span>
++            <span>Demo-Workspace</span>
++          </div>
+         </div>
++
++        {canSwitchDataSet && (
++          <div className={styles.subHeaderRight}>
++            <div className={styles.dataSetSelector}>
++              <span className={styles.dataSetLabel}>
++                <Database24Regular />
++                Data Set:
++              </span>
++              <Dropdown
++                value={currentDataSetId || ''}
++                selectedOptions={currentDataSetId ? [currentDataSetId] : []}
++                onOptionSelect={handleDataSetChange}
++                style={{ minWidth: '180px' }}
++              >
++                {availableDataSets.map((ds) => (
++                  <Option key={ds.id} value={ds.id}>
++                    {ds.name}
++                  </Option>
++                ))}
++              </Dropdown>
++            </div>
++          </div>
++        )}
+       </div>
+ 
+       {/* Main Body */}
+diff --git a/frontend/src/main.tsx b/frontend/src/main.tsx
+index 0364010..fc4ebbe 100644
+--- a/frontend/src/main.tsx
++++ b/frontend/src/main.tsx
+@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
+ import { FluentProvider, webDarkTheme } from '@fluentui/react-components'
+ import { BrowserRouter } from 'react-router-dom'
+ import { AuthProvider } from './contexts/AuthContext'
++import { DataProvider } from './contexts/DataContext'
+ import App from './App'
+ import './index.css'
+ 
+@@ -11,7 +12,9 @@ createRoot(document.getElementById('root')!).render(
+     <FluentProvider theme={webDarkTheme}>
+       <BrowserRouter>
+         <AuthProvider>
+-          <App />
++          <DataProvider>
++            <App />
++          </DataProvider>
+         </AuthProvider>
+       </BrowserRouter>
+     </FluentProvider>
+diff --git a/frontend/src/pages/Overview.tsx b/frontend/src/pages/Overview.tsx
+index cf46a28..8d307ed 100644
+--- a/frontend/src/pages/Overview.tsx
++++ b/frontend/src/pages/Overview.tsx
+@@ -1,4 +1,5 @@
+-import { makeStyles } from '@fluentui/react-components'
++import { useState, useEffect } from 'react'
++import { makeStyles, Spinner } from '@fluentui/react-components'
+ import {
+   Warning24Regular,
+   ShieldCheckmark24Regular,
+@@ -13,6 +14,13 @@ const useStyles = makeStyles({
+     flexDirection: 'column',
+     gap: '24px',
+   },
++  loadingContainer: {
++    display: 'flex',
++    justifyContent: 'center',
++    alignItems: 'center',
++    height: '100%',
++    minHeight: '50vh',
++  },
+   header: {
+     display: 'flex',
+     justifyContent: 'space-between',
+@@ -179,6 +187,22 @@ function formatTimeAgo(dateString: string): string {
+ export function Overview() {
+   const styles = useStyles()
+   const { incidents, alerts, currentDataSet, connectors } = useData()
++  const [isLoading, setIsLoading] = useState(true)
++
++  useEffect(() => {
++    const timer = setTimeout(() => {
++      setIsLoading(false)
++    }, 1000)
++    return () => clearTimeout(timer)
++  }, [])
++
++  if (isLoading) {
++    return (
++      <div className={styles.loadingContainer}>
++        <Spinner label="Loading dashboard..." />
++      </div>
++    )
++  }
+ 
+   const activeIncidents = incidents.filter(i => i.status !== 'Closed')
+   const highSeverityIncidents = incidents.filter(i => i.severity === 'High' && i.status !== 'Closed')
+@@ -296,4 +320,4 @@ export function Overview() {
+       </div>
+     </div>
+   )
+-}
++}
+\ No newline at end of file

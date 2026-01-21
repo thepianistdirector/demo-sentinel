@@ -1,4 +1,5 @@
-import { makeStyles } from '@fluentui/react-components'
+import { useState, useEffect } from 'react'
+import { makeStyles, Spinner } from '@fluentui/react-components'
 import {
   Warning24Regular,
   ShieldCheckmark24Regular,
@@ -12,6 +13,13 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     gap: '24px',
+  },
+  loadingContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    minHeight: '50vh',
   },
   header: {
     display: 'flex',
@@ -179,6 +187,22 @@ function formatTimeAgo(dateString: string): string {
 export function Overview() {
   const styles = useStyles()
   const { incidents, alerts, currentDataSet, connectors } = useData()
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <Spinner label="Loading dashboard..." />
+      </div>
+    )
+  }
 
   const activeIncidents = incidents.filter(i => i.status !== 'Closed')
   const highSeverityIncidents = incidents.filter(i => i.severity === 'High' && i.status !== 'Closed')

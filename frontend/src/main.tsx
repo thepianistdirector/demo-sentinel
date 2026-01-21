@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { FluentProvider, webDarkTheme } from '@fluentui/react-components'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
+import { DataProvider } from './contexts/DataContext'
 import App from './App'
 import './index.css'
 
@@ -11,7 +12,9 @@ createRoot(document.getElementById('root')!).render(
     <FluentProvider theme={webDarkTheme}>
       <BrowserRouter>
         <AuthProvider>
-          <App />
+          <DataProvider>
+            <App />
+          </DataProvider>
         </AuthProvider>
       </BrowserRouter>
     </FluentProvider>

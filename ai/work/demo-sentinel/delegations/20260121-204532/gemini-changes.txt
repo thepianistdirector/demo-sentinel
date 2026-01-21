@@ -1,0 +1,5 @@
+ M ai/reviews/command-log.jsonl
+ M ai/tasks.md
+ M frontend/src/components/Layout.tsx
+ M frontend/src/main.tsx
+ M frontend/src/pages/Overview.tsx
