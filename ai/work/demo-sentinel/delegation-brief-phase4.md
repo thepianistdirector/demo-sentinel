@@ -1,0 +1,93 @@
+# Delegation Brief: Phase 4 - Data Management
+
+## Summary
+
+Implement the data management layer for the Demo Sentinel platform, including CSV data loading, data storage structure, and data set management.
+
+## Context
+
+The frontend exists at `frontend/` with React + TypeScript + Fluent UI v9.
+Authentication is implemented (Phase 3). Now we need to handle data.
+
+For Phase 4, we focus on **frontend-only** mock data management since:
+- The Azure Functions backend is not yet built (Phase 7)
+- We need to demonstrate data isolation concepts in the UI
+
+## Tasks
+
+### 1. Create Data Types (`frontend/src/types/data.ts`)
+Define TypeScript interfaces for:
+- SecurityEvent (log entries)
+- Incident (security incidents)
+- Alert (security alerts)
+- DataConnector (connector config)
+- DataSet (collection of data for a client)
+
+### 2. Create Mock Data Sets (`frontend/src/data/`)
+Create mock data files:
+- `frontend/src/data/healthcare.ts` - Healthcare industry sample data
+- `frontend/src/data/financial.ts` - Financial industry sample data
+- `frontend/src/data/index.ts` - Export all data sets
+
+Each data set should include:
+- ~50 SecurityEvent records
+- ~10 Incident records
+- ~20 Alert records
+- Realistic timestamps (last 30 days)
+- Industry-appropriate event types
+
+### 3. Create Data Context (`frontend/src/contexts/DataContext.tsx`)
+React context for:
+- Current data set selection
+- Loading data based on user's dataSetId
+- Switching data sets (admin only)
+- Providing data to components
+
+### 4. Update Pages to Use Real Data
+Modify these pages to consume data from DataContext instead of inline mock data:
+- Overview.tsx (use incident/alert counts)
+- Incidents.tsx (use incident data)
+- Logs.tsx (use security events)
+
+### 5. Create Admin Data Set Switcher
+- Add data set selector dropdown for admin users
+- Allow admins to preview different client data sets
+- Store selection in context
+
+## Acceptance Criteria
+
+- [ ] Data types are properly typed with TypeScript
+- [ ] At least 2 mock data sets exist with realistic data
+- [ ] DataContext provides data to components
+- [ ] Overview, Incidents, and Logs pages use context data
+- [ ] Admin users can switch between data sets
+- [ ] Non-admin users only see their assigned data set
+- [ ] Build passes with no TypeScript errors
+
+## Technical Requirements
+
+- Use React Context API (consistent with auth implementation)
+- Match existing code style and patterns
+- No external data libraries needed
+- All data is mock/hardcoded (backend comes later)
+
+## Files to Create/Modify
+
+- CREATE: `frontend/src/types/data.ts`
+- CREATE: `frontend/src/data/healthcare.ts`
+- CREATE: `frontend/src/data/financial.ts`
+- CREATE: `frontend/src/data/index.ts`
+- CREATE: `frontend/src/contexts/DataContext.tsx`
+- MODIFY: `frontend/src/pages/Overview.tsx`
+- MODIFY: `frontend/src/pages/Incidents.tsx`
+- MODIFY: `frontend/src/pages/Logs.tsx`
+- MODIFY: `frontend/src/main.tsx` (wrap with DataProvider)
+- MODIFY: `frontend/src/components/Layout.tsx` (add data set switcher for admin)
+
+## Verification
+
+```bash
+cd frontend && npm run build
+```
+
+Build must pass with zero errors.

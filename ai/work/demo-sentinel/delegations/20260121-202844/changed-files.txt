@@ -1,0 +1,7 @@
+frontend/src/services/authService.ts
+frontend/src/contexts/AuthContext.tsx
+frontend/src/pages/Login.tsx
+frontend/src/components/ProtectedRoute.tsx
+frontend/src/App.tsx
+frontend/src/components/Layout.tsx
+frontend/src/main.tsx

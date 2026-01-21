@@ -1,11 +1,13 @@
-import { makeStyles } from '@fluentui/react-components'
+import { makeStyles, Menu, MenuTrigger, MenuPopover, MenuList, MenuItem } from '@fluentui/react-components'
 import {
   Alert24Regular,
   Settings24Regular,
   Person24Regular,
+  SignOut24Regular,
 } from '@fluentui/react-icons'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { Sidebar } from './Sidebar'
+import { useAuth } from '../contexts/AuthContext'
 
 const useStyles = makeStyles({
   root: {
@@ -61,9 +63,6 @@ const useStyles = makeStyles({
   headerNavItem: {
     padding: '4px 8px',
     cursor: 'pointer',
-    ':hover': {
-      color: '#ffffff',
-    },
   },
   headerRight: {
     display: 'flex',
@@ -79,10 +78,25 @@ const useStyles = makeStyles({
     cursor: 'pointer',
     borderRadius: '4px',
     color: '#a19f9d',
-    ':hover': {
-      backgroundColor: '#323130',
-      color: '#ffffff',
-    },
+  },
+  userButton: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    padding: '4px 8px',
+    cursor: 'pointer',
+    borderRadius: '4px',
+    backgroundColor: 'transparent',
+    border: 'none',
+    color: '#a19f9d',
+  },
+  userEmail: {
+    fontSize: '12px',
+    color: '#a19f9d',
+    maxWidth: '150px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   },
   subHeader: {
     height: '48px',
@@ -133,6 +147,13 @@ const useStyles = makeStyles({
 
 export function Layout() {
   const styles = useStyles()
+  const navigate = useNavigate()
+  const { user, logout } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
   return (
     <div className={styles.root}>
@@ -161,9 +182,32 @@ export function Layout() {
           <div className={styles.headerIcon}>
             <Settings24Regular />
           </div>
-          <div className={styles.headerIcon}>
-            <Person24Regular />
-          </div>
+          <Menu>
+            <MenuTrigger disableButtonEnhancement>
+              <button className={styles.userButton}>
+                <Person24Regular />
+                {user && <span className={styles.userEmail}>{user.email}</span>}
+              </button>
+            </MenuTrigger>
+            <MenuPopover>
+              <MenuList>
+                <MenuItem disabled>
+                  Signed in as {user?.email}
+                </MenuItem>
+                <MenuItem disabled>
+                  Role: {user?.role}
+                </MenuItem>
+                {user?.dataSetId && (
+                  <MenuItem disabled>
+                    Data Set: {user.dataSetId}
+                  </MenuItem>
+                )}
+                <MenuItem icon={<SignOut24Regular />} onClick={handleLogout}>
+                  Sign out
+                </MenuItem>
+              </MenuList>
+            </MenuPopover>
+          </Menu>
         </div>
       </div>
 

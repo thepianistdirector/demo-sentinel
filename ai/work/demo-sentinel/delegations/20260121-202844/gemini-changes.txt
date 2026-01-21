@@ -1,0 +1,7 @@
+ M ai/reviews/command-log.jsonl
+ M frontend/src/App.tsx
+ M frontend/src/components/Layout.tsx
+?? frontend/src/components/ProtectedRoute.tsx
+?? frontend/src/contexts/
+?? frontend/src/pages/Login.tsx
+?? frontend/src/services/

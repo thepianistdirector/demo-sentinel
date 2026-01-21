@@ -1,0 +1,9 @@
+ M ai/tasks.md
+M  frontend/src/App.tsx
+M  frontend/src/components/Layout.tsx
+A  frontend/src/components/ProtectedRoute.tsx
+A  frontend/src/contexts/AuthContext.tsx
+M  frontend/src/main.tsx
+A  frontend/src/pages/Login.tsx
+A  frontend/src/services/authService.ts
+?? ai/work/demo-sentinel/delegation-brief-phase4.md
