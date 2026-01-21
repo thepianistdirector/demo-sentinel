@@ -1,0 +1,12 @@
+frontend/src/pages/Hunting.tsx
+frontend/src/pages/Workbooks.tsx
+frontend/src/pages/EntityBehavior.tsx
+frontend/src/pages/ThreatIntelligence.tsx
+frontend/src/pages/Automation.tsx
+frontend/src/pages/ContentHub.tsx
+frontend/src/pages/Settings.tsx
+frontend/src/pages/Notebooks.tsx
+frontend/src/pages/MitreAttack.tsx
+frontend/src/pages/Watchlists.tsx
+frontend/src/App.tsx
+frontend/src/index.css
