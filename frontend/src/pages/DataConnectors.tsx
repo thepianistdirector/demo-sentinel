@@ -66,8 +66,11 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     gap: '12px',
     cursor: 'pointer',
-    transition: 'border-color 0.2s',
-    ':hover': {
+    transitionProperty: 'border-color',
+    transitionDuration: '0.2s',
+  },
+  connectorCardHover: {
+    '&:hover': {
       borderColor: '#0078d4',
     },
   },

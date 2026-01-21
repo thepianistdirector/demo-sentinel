@@ -1,11 +1,9 @@
-import { useState } from 'react'
-import { makeStyles, Button, Dropdown, Option, Tab, TabList } from '@fluentui/react-components'
+import { makeStyles, Button, Dropdown, Option } from '@fluentui/react-components'
 import {
   Play24Regular,
   Clock24Regular,
   Save24Regular,
   ArrowDownload24Regular,
-  Settings24Regular,
 } from '@fluentui/react-icons'
 
 const useStyles = makeStyles({

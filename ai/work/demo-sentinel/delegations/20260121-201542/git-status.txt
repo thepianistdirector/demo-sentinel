@@ -1,0 +1,16 @@
+ M ai/reviews/command-log.jsonl
+ M ai/work/demo-sentinel/delegations/20260121-201542/_tooling/github-preflight.stderr.log
+ M ai/work/demo-sentinel/delegations/20260121-201542/_tooling/github-preflight.stdout.log
+ M ai/work/demo-sentinel/delegations/20260121-201542/jules.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-201542/_tooling/github-preflight.json
+?? ai/work/demo-sentinel/delegations/20260121-201542/_tooling/jules-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201542/_tooling/jules-remote-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201542/_tooling/jules-remote-new-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201542/_tooling/jules-remote-pull-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201542/changed-files.txt
+?? ai/work/demo-sentinel/delegations/20260121-201542/git-status.txt
+?? ai/work/demo-sentinel/delegations/20260121-201542/handoff-summary.md
+?? ai/work/demo-sentinel/delegations/20260121-201542/jules-pull.log
+?? ai/work/demo-sentinel/delegations/20260121-201542/jules-remote-new.log
+?? ai/work/demo-sentinel/delegations/20260121-201542/jules.session_id
+?? ai/work/demo-sentinel/delegations/20260121-201542/selected-engine.txt

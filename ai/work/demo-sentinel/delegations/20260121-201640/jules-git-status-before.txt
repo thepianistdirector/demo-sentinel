@@ -1,0 +1,2 @@
+ M frontend/src/pages/DataConnectors.tsx
+ M frontend/src/pages/Logs.tsx
