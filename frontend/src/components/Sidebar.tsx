@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { makeStyles, tokens } from '@fluentui/react-components'
+import { makeStyles } from '@fluentui/react-components'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {
   Home24Regular,
@@ -26,8 +25,6 @@ import {
   Play24Filled,
   Settings24Regular,
   Settings24Filled,
-  ChevronDown20Regular,
-  ChevronRight20Regular,
 } from '@fluentui/react-icons'
 
 const useStyles = makeStyles({

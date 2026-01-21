@@ -1,0 +1,7 @@
+ M ai/reviews/command-log.jsonl
+?? frontend/ai/work/demo-sentinel/delegations/20260121-201140/
+?? frontend/src/pages/Automation.tsx
+?? frontend/src/pages/ContentHub.tsx
+?? frontend/src/pages/Notebooks.tsx
+?? frontend/src/pages/Settings.tsx
+?? test-delegation.txt

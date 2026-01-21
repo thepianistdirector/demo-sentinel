@@ -1,0 +1,30 @@
+ M ai/reviews/command-log.jsonl
+ M ai/work/demo-sentinel/delegations/20260121-201140/_tooling/github-preflight.stderr.log
+ M ai/work/demo-sentinel/delegations/20260121-201140/_tooling/github-preflight.stdout.log
+ M ai/work/demo-sentinel/delegations/20260121-201140/jules.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-201140/_tooling/codex-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/_tooling/gemini-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/_tooling/github-preflight.json
+?? ai/work/demo-sentinel/delegations/20260121-201140/_tooling/jules-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/_tooling/jules-remote-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/_tooling/jules-remote-new-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/_tooling/jules-remote-pull-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/changed-files.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/codex.attempt.log
+?? ai/work/demo-sentinel/delegations/20260121-201140/codex.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-201140/codex.stdout.log
+?? ai/work/demo-sentinel/delegations/20260121-201140/gemini-changes.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/gemini.attempt.log
+?? ai/work/demo-sentinel/delegations/20260121-201140/gemini.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-201140/gemini.stdout.log
+?? ai/work/demo-sentinel/delegations/20260121-201140/git-status.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/handoff-summary.md
+?? ai/work/demo-sentinel/delegations/20260121-201140/jules-blocked.txt
+?? ai/work/demo-sentinel/delegations/20260121-201140/jules-remote-new.log
+?? ai/work/demo-sentinel/delegations/20260121-201140/selected-engine.txt
+?? frontend/ai/work/demo-sentinel/delegations/20260121-201140/
+?? frontend/src/pages/Automation.tsx
+?? frontend/src/pages/ContentHub.tsx
+?? frontend/src/pages/Notebooks.tsx
+?? frontend/src/pages/Settings.tsx
+?? test-delegation.txt

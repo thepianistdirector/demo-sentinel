@@ -1,0 +1,13 @@
+ M frontend/src/App.tsx
+ M frontend/src/components/Layout.tsx
+ M frontend/src/components/Sidebar.tsx
+ M frontend/src/index.css
+ M frontend/src/pages/Overview.tsx
+?? frontend/ai/work/demo-sentinel/delegations/20260121-201140/
+?? frontend/src/pages/Automation.tsx
+?? frontend/src/pages/ContentHub.tsx
+?? frontend/src/pages/MitreAttack.tsx
+?? frontend/src/pages/Notebooks.tsx
+?? frontend/src/pages/Settings.tsx
+?? frontend/src/pages/Watchlists.tsx
+?? test-delegation.txt
