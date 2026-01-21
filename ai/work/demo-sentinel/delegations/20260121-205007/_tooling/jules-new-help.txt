@@ -1,0 +1,25 @@
+Assign a new session to Jules (defaults to current working directory)
+
+Usage:
+  jules new [flags]
+
+Examples:
+# Create a session using the current working directory's repository
+jules new "add the solarized dark theme"
+
+# Create a session for a specific repository
+jules new --repo jiahao42/jules-cli "add the solarized dark theme"
+
+# Create 3 parallel sessions for the same task
+jules new --repo jiahao42/jules-cli --parallel 3 "add the solarized dark theme"
+
+# Pipe input as the session description
+cat TODO.md | jules new
+
+Flags:
+  -h, --help           help for new
+      --parallel int   Number of parallel sessions to create for the same task (1-5) (default 1)
+      --repo string    Which repo you want Jules to work on (defaults to current working directory), example format: jiahao42/jules-cli
+
+Global Flags:
+      --theme string   Which theme to use, dark/light (default "dark")

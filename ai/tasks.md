@@ -39,7 +39,7 @@ ACTIVE_UPDATED_AT: 2026-01-21
 - [x] Phase 2: Core UI Components (Layout, Sidebar, Navigation)
 - [x] Phase 3: Authentication
 - [x] Phase 4: Data Management
-- [ ] Phase 5: KQL Engine
+- [x] Phase 5: KQL Engine
 - [x] Phase 6: Sentinel Pages (All pages created with mock data)
 - [ ] Phase 7: Infrastructure
 - [ ] Phase 8: Polish & Testing
@@ -67,6 +67,17 @@ ACTIVE_UPDATED_AT: 2026-01-21
 - DataContext with role-based data access (admin sees all, client sees assigned)
 - Updated Overview, Incidents, Logs pages to use DataContext
 - Admin data set switcher dropdown in header
+- Build passes with zero TypeScript errors
+
+**Phase 5 Completed:**
+- KQL Lexer with Chevrotain for all KQL tokens
+- KQL Parser with full CST grammar and operator precedence
+- KQL Visitor for CST to AST transformation
+- KQL Executor supporting: where, project, extend, summarize, sort, top, take, distinct
+- 17 pre-canned queries across Security, Identity, Compliance, Performance categories
+- Query history hook with localStorage persistence
+- Monaco Editor integration in Logs page
+- Sample queries dropdown and query history dropdown
 - Build passes with zero TypeScript errors
 
 ---

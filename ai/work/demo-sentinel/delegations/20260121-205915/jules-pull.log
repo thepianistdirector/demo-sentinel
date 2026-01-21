@@ -1,0 +1,118 @@
+--- Pull attempt 1 ---
+Error: api error: status 404, content: {
+  "error": {
+    "code": 404,
+    "message": "Requested entity was not found.",
+    "status": "NOT_FOUND"
+  }
+}
+
+--- Pull attempt 2 ---
+No diff found in the remote VM.
+
+--- Pull attempt 3 ---
+No diff found in the remote VM.
+
+--- Pull attempt 4 ---
+diff --git a/.dockerignore b/.dockerignore
+new file mode 100644
+index 0000000..176b428
+--- /dev/null
++++ b/.dockerignore
+@@ -0,0 +1,10 @@
++node_modules
++dist
++.env
++docker-compose.yml
++Dockerfile
++.dockerignore
++frontend/node_modules
++frontend/dist
++ai
++frontend/ai
+diff --git a/Dockerfile b/Dockerfile
+new file mode 100644
+index 0000000..07e44de
+--- /dev/null
++++ b/Dockerfile
+@@ -0,0 +1,23 @@
++# Stage 1: Build the React application
++FROM node:18-alpine AS build
++
++WORKDIR /app
++
++COPY frontend/package.json frontend/pnpm-lock.yaml ./
++RUN npm install -g pnpm && pnpm install
++
++COPY frontend/ ./
++
++RUN pnpm run build
++
++# Stage 2: Serve the application with Nginx
++FROM nginx:alpine
++
++COPY --from=build /app/dist /usr/share/nginx/html
++
++# Copy the nginx config
++COPY nginx.conf /etc/nginx/conf.d/default.conf
++
++EXPOSE 80
++
++CMD ["nginx", "-g", "daemon off;"]
+diff --git a/Dockerfile.dev b/Dockerfile.dev
+new file mode 100644
+index 0000000..cd45eb4
+--- /dev/null
++++ b/Dockerfile.dev
+@@ -0,0 +1,17 @@
++# Dockerfile for development
++FROM node:18-alpine
++
++WORKDIR /app
++
++# Copy frontend package files and install dependencies
++COPY frontend/package.json frontend/pnpm-lock.yaml ./frontend/
++RUN cd frontend && npm install -g pnpm && pnpm install
++
++# Copy the rest of the frontend code
++COPY frontend/ ./frontend/
++
++# Expose the development port
++EXPOSE 3000
++
++# Start the development server
++CMD ["sh", "-c", "cd /app/frontend && pnpm dev --host"]
+diff --git a/docker-compose.yml b/docker-compose.yml
+new file mode 100644
+index 0000000..8fcb180
+--- /dev/null
++++ b/docker-compose.yml
+@@ -0,0 +1,27 @@
++version: '3.8'
++
++services:
++  dev:
++    build:
++      context: .
++      dockerfile: Dockerfile.dev
++    ports:
++      - "3000:3000"
++    volumes:
++      - ./frontend:/app/frontend
++      - /app/frontend/node_modules
++    environment:
++      - NODE_ENV=development
++    command: >
++      sh -c "cd /app/frontend && npm install -g pnpm && pnpm install && pnpm dev --host"
++
++  prod:
++    build:
++      context: .
++      dockerfile: Dockerfile
++    ports:
++      - "80:80"
++
++networks:
++  default:
++    driver: bridge
+

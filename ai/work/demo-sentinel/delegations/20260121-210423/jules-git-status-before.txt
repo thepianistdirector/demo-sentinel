@@ -1,0 +1,14 @@
+ M ai/tasks.md
+ M frontend/package-lock.json
+ M frontend/package.json
+ M frontend/src/pages/Logs.tsx
+ M frontend/vite.config.ts
+?? docker-compose.yml
+?? frontend/.dockerignore
+?? frontend/.env.example
+?? frontend/Dockerfile
+?? frontend/nginx.conf
+?? frontend/src/data/precannedQueries.ts
+?? frontend/src/hooks/
+?? frontend/src/services/kql/
+?? frontend/staticwebapp.config.json

@@ -1,0 +1,76 @@
+# Delegation Brief: Phase 7 - Infrastructure
+
+## Summary
+
+Set up development and deployment infrastructure for the demo-sentinel platform. This includes Docker containerization for local development, environment configuration, and basic deployment setup.
+
+## Goal
+
+Enable easy local development and prepare the application for deployment to Azure Static Web Apps or similar hosting.
+
+## Acceptance Criteria
+
+1. **Docker Development Setup**
+   - Dockerfile for building the frontend
+   - docker-compose.yml for local development
+   - Hot reload working in Docker
+
+2. **Environment Configuration**
+   - .env.example with documented variables
+   - Environment-based API URL configuration
+   - Production vs development build modes
+
+3. **Build Optimization**
+   - Vite build configuration for production
+   - Code splitting setup
+   - Asset optimization
+
+4. **Deployment Preparation**
+   - Static site build output in dist/
+   - SPA routing configuration (redirects for client-side routing)
+   - Documentation for deployment options
+
+## Files to Create/Modify
+
+### New Files
+- `Dockerfile` - Multi-stage build for frontend
+- `docker-compose.yml` - Development environment
+- `.dockerignore` - Exclude unnecessary files from Docker context
+- `.env.example` - Environment variable template
+- `nginx.conf` - Production serving configuration (for Docker)
+- `staticwebapp.config.json` - Azure Static Web Apps config (optional)
+
+### Modify Files
+- `frontend/vite.config.ts` - Add build optimizations
+- `frontend/package.json` - Add Docker-related scripts if needed
+
+## Technical Constraints
+
+- Keep the setup simple - this is a demo app
+- Support both Docker and non-Docker development
+- Frontend-only deployment (no backend API needed for demo)
+
+## Verification Commands
+
+```bash
+# Build Docker image
+docker build -t demo-sentinel .
+
+# Run with docker-compose
+docker-compose up -d
+
+# Verify frontend accessible at http://localhost:3000
+
+# Production build
+cd frontend && npm run build
+
+# Verify dist/ directory created with all assets
+ls -la frontend/dist/
+```
+
+## Notes
+
+- The app is frontend-only with mock data
+- No backend API or database required
+- Authentication is simulated (localStorage)
+- Focus on making it easy to demo locally

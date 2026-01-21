@@ -2,7 +2,8 @@
 [preflight] GitHub user: thepianistdirector
 [preflight] Origin already set to GitHub: https://github.com/thepianistdirector/demo-sentinel.git
 [preflight] Warning: current branch (master) != ACTIVE_BRANCH (main)
-[preflight] Staging 36 files for preflight commit
+[preflight] Staging 26 files for preflight commit
+[preflight] Nothing staged for commit
 [preflight] Pushed branch master to origin
-[preflight] Report written to /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.json
+[preflight] Report written to /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-205915/_tooling/github-preflight.json
 [preflight] Preflight complete

@@ -1,0 +1,83 @@
+Session is created.
+ID: 14786598478170495551
+Task: # Delegation Brief: Phase 5 - KQL Engine
+
+## Summary
+
+Implement a functional KQL (Kusto Query Language) engine for the demo-sentinel platform. This engine will parse and execute KQL queries against the in-memory mock data sets (healthcare and financial) created in Phase 4.
+
+## Goal
+
+Build a KQL engine that can run queries like:
+```kql
+SecurityEvent | where EventID == 4625 | summarize count() by Account | top 10 by count_
+```
+
+And return correct results from the mock data, powering the Logs page's query functionality.
+
+## Acceptance Criteria
+
+1. **KQL Parser** - Parse valid KQL syntax using a parser generator
+2. **Core Operators** - Support these operators:
+   - `where` - filter rows
+   - `project` - select columns
+   - `extend` - add computed columns
+   - `summarize` - aggregation (count, sum, avg, min, max, dcount)
+   - `sort` / `order by` - ordering
+   - `top` / `take` / `limit` - limit results
+   - `distinct` - unique values
+3. **Query Execution** - Execute queries against SecurityEvent data from DataContext
+4. **Pre-canned Queries** - Library of example queries for demo purposes
+5. **Query History** - Store and retrieve recent queries (localStorage)
+6. **Monaco Integration** - KQL syntax highlighting in the Logs page editor
+7. **Performance** - Query execution under 2 seconds for 100 events
+
+## Files to Create/Modify
+
+### New Files
+- `frontend/src/services/kql/parser.ts` - KQL parser using Chevrotain or similar
+- `frontend/src/services/kql/executor.ts` - Query execution engine
+- `frontend/src/services/kql/operators.ts` - Operator implementations
+- `frontend/src/services/kql/types.ts` - KQL AST types
+- `frontend/src/services/kql/index.ts` - Public exports
+- `frontend/src/data/precannedQueries.ts` - Library of demo queries
+- `frontend/src/hooks/useQueryHistory.ts` - Query history hook
+
+### Modify Files
+- `frontend/src/pages/Logs.tsx` - Integrate KQL engine with Monaco editor
+- `frontend/package.json` - Add Monaco editor and parser dependencies
+
+## Technical Constraints
+
+- Use Chevrotain for parsing (well-documented, TypeScript support)
+- Use Monaco Editor for KQL editing (standard for KQL interfaces)
+- Query results should be an array of objects matching the projected columns
+- Error handling should provide helpful messages (line/column of error)
+
+## Pre-canned Query Examples
+
+Include queries for:
+- Failed logon attempts
+- Successful logons by user
+- Events by computer
+- Top event types
+- Events over time
+- Specific EventID searches
+
+## Verification Commands
+
+```bash
+cd frontend && npm run build
+cd frontend && npm run lint
+```
+
+## Dependencies to Add
+
+```json
+{
+  "chevrotain": "^11.0.0",
+  "@monaco-editor/react": "^4.6.0"
+}
+```
+
+URL: https://jules.google.com/session/14786598478170495551

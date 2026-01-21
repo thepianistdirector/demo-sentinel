@@ -1,0 +1,3 @@
+/bin/bash: line 1: export: `-p': not a valid identifier
+/bin/bash: line 1: export: `': not a valid identifier
+/bin/bash: line 1: export: `/home/lucas/.local/share/claude-code/scripts/ai/delegate_jules.sh': not a valid identifier

@@ -1,0 +1,909 @@
+diff --git a/ai/reviews/command-log.jsonl b/ai/reviews/command-log.jsonl
+index f9867e9..dc3e2e7 100644
+--- a/ai/reviews/command-log.jsonl
++++ b/ai/reviews/command-log.jsonl
+@@ -95,3 +95,61 @@
+ {"ts": "2026-01-21T20:33:23Z", "cmd": "git diff --cached --no-color -- frontend/ > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-202844/patch.diff 2>&1 && echo \"Patch written successfully\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+ {"ts": "2026-01-21T20:34:04Z", "cmd": "TIMESTAMP=$(date +%Y%m%d-%H%M%S) && mkdir -p \"/home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/${TIMESTAMP}\" && echo \"$TIMESTAMP\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+ {"ts": "2026-01-21T20:34:32Z", "cmd": "cat > ~/.local/share/claude-code/scripts/ai/CHANGELOG.md << 'EOF'\n# Delegation Scripts Changelog\n\n## 2026-01-21: Major Verification Overhaul\n\n### Problem\nThe `/delegate` command was failing to properl", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:34:53Z", "cmd": "cat > ~/.local/share/claude-code/scripts/ai/README.md << 'EOF'\n# AI Delegation Scripts\n\nGlobal scripts for delegating work to external AI engines.\n\n## Location\n\n```\n~/.local/share/claude-code/scripts/", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:35:25Z", "cmd": "JULES_PULL_TIMEOUT_SECS=180 JULES_PULL_INTERVAL=20 ~/.local/share/claude-code/scripts/ai/delegate.sh jules-loading-test /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/jules-test-brie", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:36:01Z", "cmd": "sleep 30 && tail -20 /tmp/claude/-home-lucas-code-demo-sentinel/tasks/ba229da.output", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:38:59Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh demo-sentinel /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegation-brief-phase4.md 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:39:11Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/frontend/src/types /home/lucas/code/demo-sentinel/frontend/src/data", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:39:25Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-203525", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:39:40Z", "cmd": "cat > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-203525/handoff-summary.md << 'EOF'\n# Handoff Summary\n\n- Engine: claude_code\n- Delegation dir: /home/lucas/code/demo-sent", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:40:22Z", "cmd": "sleep 60 && tail -30 /tmp/claude/-home-lucas-code-demo-sentinel/tasks/ba229da.output", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:02Z", "cmd": "jules --help 2>&1 | head -30", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:04Z", "cmd": "codex --help 2>&1 | head -30", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:16Z", "cmd": "jules new --help 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:17Z", "cmd": "cat ~/.gemini/settings.json 2>/dev/null || echo \"No settings.json found\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:25Z", "cmd": "ls -la ~/.gemini/ 2>/dev/null", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:26Z", "cmd": "cat ~/.gemini/extensions/*/config.json 2>/dev/null | head -50 || echo \"No extension configs\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:33Z", "cmd": "cat ~/.gemini/policies/* 2>/dev/null || echo \"No policy files\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:43:38Z", "cmd": "gemini --help 2>&1 | head -40", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:44:28Z", "cmd": "cat > /tmp/delegate_jules_v2.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\n# Jules Delegation Script\n# Uses 'jules new' command with pull workflow\n\nROOT=\"$(git rev-parse --show-toplevel 2>/dev", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:44:59Z", "cmd": "cat > /tmp/delegate_gemini_v2.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\nROOT=\"$(git rev-parse --show-toplevel 2>/dev/null || pwd)\"\nDELEG_DIR=\"${AI_DELEGATION_DIR:?AI_DELEGATION_DIR not set", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:45:17Z", "cmd": "cat >> ~/.local/share/claude-code/scripts/ai/CHANGELOG.md << 'EOF'\n\n---\n\n## 2026-01-21: Engine Command Fixes\n\n### Problem\nExternal engines were failing due to:\n1. Jules using deprecated `jules remote ", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:45:32Z", "cmd": "JULES_PULL_TIMEOUT_SECS=120 JULES_PULL_INTERVAL=20 ~/.local/share/claude-code/scripts/ai/delegate.sh test-all-fixes /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/jules-test-brief.md", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:45:45Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-204532 && cat > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-204532/handoff-summary.md <", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:45:59Z", "cmd": "echo \"# Changed files\" > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-204532/changed-files.txt && echo \"# Patch\" > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/del", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:46:23Z", "cmd": "sleep 45 && tail -30 /tmp/claude/-home-lucas-code-demo-sentinel/tasks/b05e002.output", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:47:30Z", "cmd": "sleep 60 && cat /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-204532/jules.stderr.log 2>/dev/null || echo \"Jules still running...\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:48:09Z", "cmd": "cd /home/lucas/code/demo-sentinel/frontend && grep -r \"OptionOnSelectData\" node_modules/@fluentui --include=\"*.d.ts\" | head -20", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:48:12Z", "cmd": "grep -A 10 \"export declare type OptionOnSelectData\" node_modules/@fluentui/react-combobox/dist/index.d.ts", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:48:35Z", "cmd": "npm run build 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:48:44Z", "cmd": "cd /home/lucas/code/demo-sentinel && git diff --name-only HEAD 2>/dev/null || find frontend/src -name \"*.ts\" -o -name \"*.tsx\" | head -50", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:49:40Z", "cmd": "TIMESTAMP=$(date +%Y%m%d-%H%M%S) && mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/$TIMESTAMP && echo $TIMESTAMP", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:50:07Z", "cmd": "git -C /home/lucas/code/demo-sentinel status --short | head -10", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:50:14Z", "cmd": "git -C /home/lucas/code/demo-sentinel diff frontend/src/pages/Overview.tsx | head -60", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:50:21Z", "cmd": "git -C /home/lucas/code/demo-sentinel diff HEAD frontend/src/pages/Overview.tsx | head -80", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:51:59Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh \"demo-sentinel\" \"/home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-174940/brief.md\" 2>&1 | head -200", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:52:07Z", "cmd": "git diff HEAD~1 frontend/package.json", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:52:11Z", "cmd": "cd /home/lucas/code/demo-sentinel/frontend && cat package.json.bak", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:52:15Z", "cmd": "cp package.json.bak package.json && rm package.json.bak", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:52:42Z", "cmd": "npm install 2>&1 | tail -20", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:52:51Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/frontend/src/services/kql", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:55:54Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/frontend/src/hooks", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:57:50Z", "cmd": "npm run build 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:58:54Z", "cmd": "TIMESTAMP=$(date +%Y%m%d-%H%M%S) && mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/$TIMESTAMP && echo $TIMESTAMP", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:00:01Z", "cmd": "jules --help 2>&1 || true", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:00:07Z", "cmd": "jules remote --help 2>&1 || true", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:00:09Z", "cmd": "jules remote list --help 2>&1 || true", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:00:19Z", "cmd": "jules remote list --session 2>&1 | head -30", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:00:20Z", "cmd": "jules teleport --help 2>&1 || true", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:01:37Z", "cmd": "cat > /home/lucas/.local/share/claude-code/scripts/ai/delegate_jules.sh << 'SCRIPT_EOF'\n#!/usr/bin/env bash\nset -euo pipefail\n\n# Jules Delegation Script\n# Uses 'jules new' command with status polling ", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:02:02Z", "cmd": "cat >> /home/lucas/.local/share/claude-code/scripts/ai/CHANGELOG.md << 'EOF'\n\n---\n\n## 2026-01-21: Jules Status Polling and Teleport\n\n### Problem\nJules sessions were timing out even though they were st", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:02:13Z", "cmd": "jules remote list --session 2>&1 | grep -E \"7028347387819491945|In Progress|Completed\" | head -5", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:02:26Z", "cmd": "jules teleport 7028347387819491945 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:02:31Z", "cmd": "git -C /home/lucas/code/demo-sentinel status --porcelain | head -10", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:03:15Z", "cmd": "cat > /home/lucas/.local/share/claude-code/scripts/ai/delegate_jules.sh << 'SCRIPT_EOF'\n#!/usr/bin/env bash\nset -euo pipefail\n\n# Jules Delegation Script\n# Uses 'jules new' command with status polling ", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:03:27Z", "cmd": "# Test status extraction function\nSESSION_ID=\"7028347387819491945\"\nRAW_STATUS=$(jules remote list --session 2>/dev/null | grep \"$SESSION_ID\" | awk '{print $(NF-1), $NF}' | sed 's/^ *//')\necho \"Session", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:03:37Z", "cmd": "# Check exact format of the list output\njules remote list --session 2>&1 | head -5", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:03:45Z", "cmd": "jules remote list --session 2>&1 | grep \"7028347387819491945\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:03:56Z", "cmd": "# Test improved status extraction - just get last field\nSESSION_ID=\"7028347387819491945\"\nRAW_STATUS=$(jules remote list --session 2>/dev/null | grep \"$SESSION_ID\" | awk '{print $NF}')\necho \"Session $S", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:04:00Z", "cmd": "sed -i \"s/awk '{print \\$(NF-1), \\$NF}'/awk '{print \\$NF}'/\" /home/lucas/.local/share/claude-code/scripts/ai/delegate_jules.sh", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T21:04:08Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/test-jules\ncat > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/test-jules/brief.md << 'EOF'\n# Test Delegati", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+diff --git a/ai/tasks.md b/ai/tasks.md
+index 38ff686..6c49afe 100644
+--- a/ai/tasks.md
++++ b/ai/tasks.md
+@@ -39,7 +39,7 @@ ACTIVE_UPDATED_AT: 2026-01-21
+ - [x] Phase 2: Core UI Components (Layout, Sidebar, Navigation)
+ - [x] Phase 3: Authentication
+ - [x] Phase 4: Data Management
+-- [ ] Phase 5: KQL Engine
++- [x] Phase 5: KQL Engine
+ - [x] Phase 6: Sentinel Pages (All pages created with mock data)
+ - [ ] Phase 7: Infrastructure
+ - [ ] Phase 8: Polish & Testing
+@@ -69,6 +69,17 @@ ACTIVE_UPDATED_AT: 2026-01-21
+ - Admin data set switcher dropdown in header
+ - Build passes with zero TypeScript errors
+ 
++**Phase 5 Completed:**
++- KQL Lexer with Chevrotain for all KQL tokens
++- KQL Parser with full CST grammar and operator precedence
++- KQL Visitor for CST to AST transformation
++- KQL Executor supporting: where, project, extend, summarize, sort, top, take, distinct
++- 17 pre-canned queries across Security, Identity, Compliance, Performance categories
++- Query history hook with localStorage persistence
++- Monaco Editor integration in Logs page
++- Sample queries dropdown and query history dropdown
++- Build passes with zero TypeScript errors
++
+ ---
+ 
+ ### delegation-investigation
+diff --git a/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.stderr.log b/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.stderr.log
+index 9499418..047a3e1 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.stderr.log
+@@ -3,3 +3,6 @@
+ [preflight] Origin already set to GitHub: https://github.com/thepianistdirector/demo-sentinel.git
+ [preflight] Warning: current branch (master) != ACTIVE_BRANCH (main)
+ [preflight] Staging 36 files for preflight commit
++[preflight] Pushed branch master to origin
++[preflight] Report written to /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.json
++[preflight] Preflight complete
+diff --git a/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.stdout.log b/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.stdout.log
+index e69de29..4a3b2f9 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.stdout.log
++++ b/ai/work/demo-sentinel/delegations/20260121-205007/_tooling/github-preflight.stdout.log
+@@ -0,0 +1,12 @@
++{
++  "timestamp": "2026-01-21T20:50:07.881439+00:00",
++  "errors": [],
++  "git_root": "/home/lucas/code/demo-sentinel",
++  "owner": "thepianistdirector",
++  "repo": "demo-sentinel",
++  "original_origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "branch": "master",
++  "preflight_commit": "535d77b8827bf173ea40ed7ee0960b92e9290645",
++  "pushed": true
++}
+diff --git a/ai/work/demo-sentinel/delegations/20260121-205007/jules.stderr.log b/ai/work/demo-sentinel/delegations/20260121-205007/jules.stderr.log
+index 2d014c1..27b6f61 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-205007/jules.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-205007/jules.stderr.log
+@@ -1,2 +1,26 @@
+ [jules] Found preflight script at global path
+ [jules] Running GitHub preflight: /home/lucas/.local/share/claude-code/scripts/ai/jules_preflight_github.py
++[jules] GitHub preflight succeeded
++[jules] Capturing Jules CLI help...
++[jules] Using repo: thepianistdirector/demo-sentinel
++[jules] Creating Jules session...
++[jules] Command: cat brief.md | jules new --repo thepianistdirector/demo-sentinel
++[jules] Session created despite warnings
++[jules] Session ID: 14786598478170495551
++[jules] Session URL: https://jules.google.com/session/14786598478170495551
++[jules] Starting pull loop (timeout: 300s, interval: 30s)
++[jules] Monitor progress at: https://jules.google.com/session/14786598478170495551
++[jules] Pull attempt 1 (0s elapsed)...
++[jules] Session not ready yet (404)
++[jules] Waiting 30s before next pull...
++[jules] Pull attempt 2 (32s elapsed)...
++[jules] Jules completed but made no changes
++[jules] Waiting 30s before next pull...
++[jules] Pull attempt 3 (64s elapsed)...
++[jules] Jules completed but made no changes
++[jules] Waiting 30s before next pull...
++[jules] Pull attempt 4 (95s elapsed)...
++[jules] Jules returned a diff/patch
++[jules] Attempting to apply Jules patch...
++[jules] Patch applied successfully
++[jules] Jules delegation complete
+diff --git a/frontend/package-lock.json b/frontend/package-lock.json
+index 3945c74..a02a8db 100644
+--- a/frontend/package-lock.json
++++ b/frontend/package-lock.json
+@@ -10,6 +10,8 @@
+       "dependencies": {
+         "@fluentui/react-components": "^9.72.9",
+         "@fluentui/react-icons": "^2.0.317",
++        "@monaco-editor/react": "^4.6.0",
++        "chevrotain": "^11.0.3",
+         "react": "^19.2.0",
+         "react-dom": "^19.2.0",
+         "react-router-dom": "^7.12.0"
+@@ -321,6 +323,45 @@
+         "node": ">=6.9.0"
+       }
+     },
++    "node_modules/@chevrotain/cst-dts-gen": {
++      "version": "11.1.0",
++      "resolved": "https://registry.npmjs.org/@chevrotain/cst-dts-gen/-/cst-dts-gen-11.1.0.tgz",
++      "integrity": "sha512-Sa/G9XD23V4StfHMeQNnXbFmj8CsYUBmf+L895/hKm0RFDhxAfHzV6e58NA8j5ninntT5yqMzBW8QEbYxLkNUw==",
++      "license": "Apache-2.0",
++      "dependencies": {
++        "@chevrotain/gast": "11.1.0",
++        "@chevrotain/types": "11.1.0",
++        "lodash-es": "4.17.21"
++      }
++    },
++    "node_modules/@chevrotain/gast": {
++      "version": "11.1.0",
++      "resolved": "https://registry.npmjs.org/@chevrotain/gast/-/gast-11.1.0.tgz",
++      "integrity": "sha512-0fyRYDFneUhbyV6k22R6bBY02+FasLqcxXYVt8z51IWTZ10l2Z2Lc0hiPTgm8MNRbYZnDbNv78b9zY5DoIJKjQ==",
++      "license": "Apache-2.0",
++      "dependencies": {
++        "@chevrotain/types": "11.1.0",
++        "lodash-es": "4.17.21"
++      }
++    },
++    "node_modules/@chevrotain/regexp-to-ast": {
++      "version": "11.1.0",
++      "resolved": "https://registry.npmjs.org/@chevrotain/regexp-to-ast/-/regexp-to-ast-11.1.0.tgz",
++      "integrity": "sha512-3rW046uSp36liIAc/5G6A6h3gGbDN1eONpmJQpybIb+G2kSz0BNRc9ziT4DYrCUUbgNLd6bNVROqN9r7ZaajYg==",
++      "license": "Apache-2.0"
++    },
++    "node_modules/@chevrotain/types": {
++      "version": "11.1.0",
++      "resolved": "https://registry.npmjs.org/@chevrotain/types/-/types-11.1.0.tgz",
++      "integrity": "sha512-GXni/dwJAkClMfwCtrbGU19RXQ9O76hFxq3sgy/zufXNj3ov6J/8FOWIXxJLhnKx7gzSweATmRccjlpmr5W2nA==",
++      "license": "Apache-2.0"
++    },
++    "node_modules/@chevrotain/utils": {
++      "version": "11.1.0",
++      "resolved": "https://registry.npmjs.org/@chevrotain/utils/-/utils-11.1.0.tgz",
++      "integrity": "sha512-DrS2yldzFnjmBV0O/kDngcFxWuqg2FdmUpaD6KyTmgIIE6lR53dq80R/Zz+o6LpUrXsLJk192kXuaeIPic4WVg==",
++      "license": "Apache-2.0"
++    },
+     "node_modules/@ctrl/tinycolor": {
+       "version": "3.6.1",
+       "resolved": "https://registry.npmjs.org/@ctrl/tinycolor/-/tinycolor-3.6.1.tgz",
+@@ -2650,6 +2691,29 @@
+         "@jridgewell/sourcemap-codec": "^1.4.14"
+       }
+     },
++    "node_modules/@monaco-editor/loader": {
++      "version": "1.7.0",
++      "resolved": "https://registry.npmjs.org/@monaco-editor/loader/-/loader-1.7.0.tgz",
++      "integrity": "sha512-gIwR1HrJrrx+vfyOhYmCZ0/JcWqG5kbfG7+d3f/C1LXk2EvzAbHSg3MQ5lO2sMlo9izoAZ04shohfKLVT6crVA==",
++      "license": "MIT",
++      "dependencies": {
++        "state-local": "^1.0.6"
++      }
++    },
++    "node_modules/@monaco-editor/react": {
++      "version": "4.7.0",
++      "resolved": "https://registry.npmjs.org/@monaco-editor/react/-/react-4.7.0.tgz",
++      "integrity": "sha512-cyzXQCtO47ydzxpQtCGSQGOC8Gk3ZUeBXFAxD+CWXYFo5OqZyZUonFl0DwUlTyAfRHntBfw2p3w4s9R6oe1eCA==",
++      "license": "MIT",
++      "dependencies": {
++        "@monaco-editor/loader": "^1.5.0"
++      },
++      "peerDependencies": {
++        "monaco-editor": ">= 0.25.0 < 1",
++        "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
++        "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
++      }
++    },
+     "node_modules/@rolldown/pluginutils": {
+       "version": "1.0.0-beta.53",
+       "resolved": "https://registry.npmjs.org/@rolldown/pluginutils/-/pluginutils-1.0.0-beta.53.tgz",
+@@ -3106,6 +3170,13 @@
+         "@types/react": "^19.2.0"
+       }
+     },
++    "node_modules/@types/trusted-types": {
++      "version": "2.0.7",
++      "resolved": "https://registry.npmjs.org/@types/trusted-types/-/trusted-types-2.0.7.tgz",
++      "integrity": "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==",
++      "license": "MIT",
++      "optional": true
++    },
+     "node_modules/@typescript-eslint/eslint-plugin": {
+       "version": "8.53.1",
+       "resolved": "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.53.1.tgz",
+@@ -3572,6 +3643,20 @@
+         "url": "https://github.com/chalk/chalk?sponsor=1"
+       }
+     },
++    "node_modules/chevrotain": {
++      "version": "11.1.0",
++      "resolved": "https://registry.npmjs.org/chevrotain/-/chevrotain-11.1.0.tgz",
++      "integrity": "sha512-BqwSf3RDQlHQ+EyWqTLDd23IwJ3clav6QyNQM4FNj0RF2/HfXESPjrApKkEstV5jbyJtUB8U4zrUFdLd2Cx1oA==",
++      "license": "Apache-2.0",
++      "dependencies": {
++        "@chevrotain/cst-dts-gen": "11.1.0",
++        "@chevrotain/gast": "11.1.0",
++        "@chevrotain/regexp-to-ast": "11.1.0",
++        "@chevrotain/types": "11.1.0",
++        "@chevrotain/utils": "11.1.0",
++        "lodash-es": "4.17.21"
++      }
++    },
+     "node_modules/color-convert": {
+       "version": "2.0.1",
+       "resolved": "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz",
+@@ -3665,6 +3750,15 @@
+       "dev": true,
+       "license": "MIT"
+     },
++    "node_modules/dompurify": {
++      "version": "3.2.7",
++      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-3.2.7.tgz",
++      "integrity": "sha512-WhL/YuveyGXJaerVlMYGWhvQswa7myDG17P7Vu65EWC05o8vfeNbvNf4d/BOvH99+ZW+LlQsc1GDKMa1vNK6dw==",
++      "license": "(MPL-2.0 OR Apache-2.0)",
++      "optionalDependencies": {
++        "@types/trusted-types": "^2.0.7"
++      }
++    },
+     "node_modules/electron-to-chromium": {
+       "version": "1.5.267",
+       "resolved": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.267.tgz",
+@@ -4295,6 +4389,12 @@
+         "url": "https://github.com/sponsors/sindresorhus"
+       }
+     },
++    "node_modules/lodash-es": {
++      "version": "4.17.21",
++      "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz",
++      "integrity": "sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==",
++      "license": "MIT"
++    },
+     "node_modules/lodash.merge": {
+       "version": "4.6.2",
+       "resolved": "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz",
+@@ -4312,6 +4412,18 @@
+         "yallist": "^3.0.2"
+       }
+     },
++    "node_modules/marked": {
++      "version": "14.0.0",
++      "resolved": "https://registry.npmjs.org/marked/-/marked-14.0.0.tgz",
++      "integrity": "sha512-uIj4+faQ+MgHgwUW1l2PsPglZLOLOT1uErt06dAPtx2kjteLAkbsd/0FiYg/MGS+i7ZKLb7w2WClxHkzOOuryQ==",
++      "license": "MIT",
++      "bin": {
++        "marked": "bin/marked.js"
++      },
++      "engines": {
++        "node": ">= 18"
++      }
++    },
+     "node_modules/minimatch": {
+       "version": "3.1.2",
+       "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-3.1.2.tgz",
+@@ -4325,6 +4437,17 @@
+         "node": "*"
+       }
+     },
++    "node_modules/monaco-editor": {
++      "version": "0.55.1",
++      "resolved": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.55.1.tgz",
++      "integrity": "sha512-jz4x+TJNFHwHtwuV9vA9rMujcZRb0CEilTEwG2rRSpe/A7Jdkuj8xPKttCgOh+v/lkHy7HsZ64oj+q3xoAFl9A==",
++      "license": "MIT",
++      "peer": true,
++      "dependencies": {
++        "dompurify": "3.2.7",
++        "marked": "14.0.0"
++      }
++    },
+     "node_modules/ms": {
+       "version": "2.1.3",
+       "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
+@@ -4715,6 +4838,12 @@
+         "node": ">=0.10.0"
+       }
+     },
++    "node_modules/state-local": {
++      "version": "1.0.7",
++      "resolved": "https://registry.npmjs.org/state-local/-/state-local-1.0.7.tgz",
++      "integrity": "sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==",
++      "license": "MIT"
++    },
+     "node_modules/strip-json-comments": {
+       "version": "3.1.1",
+       "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-3.1.1.tgz",
+diff --git a/frontend/package.json b/frontend/package.json
+index e264008..71a3860 100644
+--- a/frontend/package.json
++++ b/frontend/package.json
+@@ -12,6 +12,8 @@
+   "dependencies": {
+     "@fluentui/react-components": "^9.72.9",
+     "@fluentui/react-icons": "^2.0.317",
++    "@monaco-editor/react": "^4.6.0",
++    "chevrotain": "^11.0.3",
+     "react": "^19.2.0",
+     "react-dom": "^19.2.0",
+     "react-router-dom": "^7.12.0"
+diff --git a/frontend/src/pages/Logs.tsx b/frontend/src/pages/Logs.tsx
+index 789e175..836b039 100644
+--- a/frontend/src/pages/Logs.tsx
++++ b/frontend/src/pages/Logs.tsx
+@@ -1,11 +1,19 @@
+-import { makeStyles, Button, Dropdown, Option } from '@fluentui/react-components'
++import { useState, useEffect, useCallback } from 'react'
++import { makeStyles, Button, Dropdown, Option, Menu, MenuTrigger, MenuPopover, MenuList, MenuItem, Spinner } from '@fluentui/react-components'
+ import {
+   Play24Regular,
+   Clock24Regular,
+   Save24Regular,
+   ArrowDownload24Regular,
++  ChevronRight20Regular,
+ } from '@fluentui/react-icons'
++import Editor from '@monaco-editor/react'
+ import { useData } from '../contexts/DataContext'
++import { executeKql, registerTable } from '../services/kql'
++import type { KqlValue } from '../services/kql'
++import { precannedQueries, getAllCategories, getQueriesByCategory } from '../data/precannedQueries'
++import type { PrecannedQuery } from '../data/precannedQueries'
++import { useQueryHistory } from '../hooks/useQueryHistory'
+ 
+ const useStyles = makeStyles({
+   root: {
+@@ -76,26 +84,6 @@ const useStyles = makeStyles({
+     backgroundColor: '#1e1e1e',
+     color: '#ffffff',
+   },
+-  editor: {
+-    minHeight: '200px',
+-    padding: '12px',
+-    fontFamily: 'Consolas, Monaco, monospace',
+-    fontSize: '14px',
+-    color: '#d4d4d4',
+-    lineHeight: '1.5',
+-  },
+-  keyword: {
+-    color: '#569cd6',
+-  },
+-  operator: {
+-    color: '#d4d4d4',
+-  },
+-  function: {
+-    color: '#dcdcaa',
+-  },
+-  number: {
+-    color: '#b5cea8',
+-  },
+   resultsSection: {
+     flex: 1,
+     display: 'flex',
+@@ -120,8 +108,7 @@ const useStyles = makeStyles({
+     backgroundColor: '#1b1a19',
+   },
+   tableHeader: {
+-    display: 'grid',
+-    gridTemplateColumns: '180px 120px 200px 150px 1fr',
++    display: 'flex',
+     gap: '12px',
+     padding: '10px 16px',
+     backgroundColor: '#252423',
+@@ -133,10 +120,11 @@ const useStyles = makeStyles({
+     fontSize: '12px',
+     fontWeight: 600,
+     color: '#a19f9d',
++    minWidth: '120px',
++    flex: 1,
+   },
+   tableRow: {
+-    display: 'grid',
+-    gridTemplateColumns: '180px 120px 200px 150px 1fr',
++    display: 'flex',
+     gap: '12px',
+     padding: '10px 16px',
+     borderBottom: '1px solid #323130',
+@@ -147,12 +135,20 @@ const useStyles = makeStyles({
+     overflow: 'hidden',
+     textOverflow: 'ellipsis',
+     whiteSpace: 'nowrap',
++    minWidth: '120px',
++    flex: 1,
+   },
+   schemaSidebar: {
+-    width: '240px',
++    width: '260px',
+     backgroundColor: '#252423',
+     borderLeft: '1px solid #323130',
++    display: 'flex',
++    flexDirection: 'column',
++    overflow: 'hidden',
++  },
++  schemaSection: {
+     padding: '12px',
++    flex: 1,
+     overflowY: 'auto',
+   },
+   schemaTitle: {
+@@ -180,6 +176,69 @@ const useStyles = makeStyles({
+     flexDirection: 'column',
+     overflow: 'hidden',
+   },
++  errorMessage: {
++    padding: '16px',
++    backgroundColor: '#442726',
++    color: '#f1707a',
++    borderRadius: '4px',
++    fontSize: '13px',
++    marginBottom: '8px',
++  },
++  queryCategory: {
++    fontSize: '12px',
++    fontWeight: 600,
++    color: '#a19f9d',
++    padding: '8px 12px 4px',
++    textTransform: 'uppercase',
++  },
++  precannedQuery: {
++    padding: '8px 12px',
++    cursor: 'pointer',
++    borderRadius: '4px',
++    fontSize: '13px',
++    color: '#d2d0ce',
++    display: 'flex',
++    alignItems: 'center',
++    gap: '8px',
++  },
++  historyItem: {
++    padding: '8px 12px',
++    cursor: 'pointer',
++    borderRadius: '4px',
++    fontSize: '12px',
++    color: '#d2d0ce',
++    borderBottom: '1px solid #323130',
++  },
++  historyQuery: {
++    fontFamily: 'Consolas, Monaco, monospace',
++    overflow: 'hidden',
++    textOverflow: 'ellipsis',
++    whiteSpace: 'nowrap',
++    marginBottom: '4px',
++  },
++  historyMeta: {
++    fontSize: '11px',
++    color: '#a19f9d',
++  },
++  panelHeader: {
++    display: 'flex',
++    justifyContent: 'space-between',
++    alignItems: 'center',
++    padding: '12px',
++    borderBottom: '1px solid #323130',
++  },
++  panelTitle: {
++    fontSize: '14px',
++    fontWeight: 600,
++    color: '#ffffff',
++  },
++  loadingOverlay: {
++    display: 'flex',
++    justifyContent: 'center',
++    alignItems: 'center',
++    padding: '48px',
++    color: '#a19f9d',
++  },
+ })
+ 
+ const tables = [
+@@ -193,19 +252,87 @@ const tables = [
+   'Heartbeat',
+ ]
+ 
+-function formatTimestamp(dateString: string): string {
+-  const date = new Date(dateString)
+-  return date.toISOString().replace('T', ' ').substring(0, 19)
++const defaultQuery = `SecurityEvent
++| where EventID == 4624 or EventID == 4625
++| summarize count() by Account, EventID
++| sort by count_ desc
++| take 20`
++
++function formatValue(value: KqlValue): string {
++  if (value === null || value === undefined) return ''
++  if (value instanceof Date) return value.toISOString().replace('T', ' ').substring(0, 19)
++  return String(value)
++}
++
++function formatTimestamp(timestamp: number): string {
++  const date = new Date(timestamp)
++  return date.toLocaleString()
+ }
+ 
+ export function Logs() {
+   const styles = useStyles()
+   const { securityEvents } = useData()
++  const { history, addToHistory, clearHistory } = useQueryHistory()
++
++  const [query, setQuery] = useState(defaultQuery)
++  const [results, setResults] = useState<{ columns: string[]; rows: Record<string, KqlValue>[] }>({ columns: [], rows: [] })
++  const [error, setError] = useState<string | null>(null)
++  const [isRunning, setIsRunning] = useState(false)
++  const [showHistory, setShowHistory] = useState(false)
++  const [showQueries, setShowQueries] = useState(false)
+ 
+-  // Sort events by time, most recent first
+-  const sortedEvents = [...securityEvents]
+-    .sort((a, b) => new Date(b.timeGenerated).getTime() - new Date(a.timeGenerated).getTime())
+-    .slice(0, 100) // Limit to 100 for display
++  // Register the security events table when data changes
++  useEffect(() => {
++    if (securityEvents.length > 0) {
++      // Convert SecurityEvent to generic records for KQL
++      const records = securityEvents.map(e => ({
++        id: e.id,
++        TimeGenerated: e.timeGenerated,
++        Computer: e.computer,
++        Account: e.account,
++        EventID: e.eventID,
++        Activity: e.activity,
++        LogonType: e.logonType ?? null,
++        CommandLine: e.commandLine ?? null,
++      }))
++      registerTable('SecurityEvent', records)
++    }
++  }, [securityEvents])
++
++  const runQuery = useCallback(() => {
++    setIsRunning(true)
++    setError(null)
++
++    // Small delay to show loading state
++    setTimeout(() => {
++      const result = executeKql(query)
++
++      if (result.error) {
++        setError(result.error)
++        setResults({ columns: [], rows: [] })
++        addToHistory(query, undefined, result.error)
++      } else {
++        setResults({ columns: result.columns, rows: result.rows })
++        addToHistory(query, result.rows.length)
++      }
++
++      setIsRunning(false)
++    }, 100)
++  }, [query, addToHistory])
++
++  const handleSelectPrecannedQuery = (q: PrecannedQuery) => {
++    setQuery(q.query)
++    setShowQueries(false)
++  }
++
++  const handleSelectHistoryItem = (historyQuery: string) => {
++    setQuery(historyQuery)
++    setShowHistory(false)
++  }
++
++  const handleTableClick = (tableName: string) => {
++    setQuery(`${tableName}\n| take 100`)
++  }
+ 
+   return (
+     <div className={styles.root}>
+@@ -219,21 +346,83 @@ export function Logs() {
+           <div className={styles.querySection}>
+             <div className={styles.toolbar}>
+               <div className={styles.toolbarLeft}>
+-                <Button appearance="primary" icon={<Play24Regular />}>Run</Button>
++                <Button
++                  appearance="primary"
++                  icon={<Play24Regular />}
++                  onClick={runQuery}
++                  disabled={isRunning}
++                >
++                  {isRunning ? 'Running...' : 'Run'}
++                </Button>
+                 <Dropdown placeholder="Time range" style={{ minWidth: '150px' }}>
+                   <Option>Last 24 hours</Option>
+                   <Option>Last 7 days</Option>
+                   <Option>Last 30 days</Option>
+                   <Option>Custom</Option>
+                 </Dropdown>
++                <Menu open={showQueries} onOpenChange={(_, data) => setShowQueries(data.open)}>
++                  <MenuTrigger disableButtonEnhancement>
++                    <Button appearance="subtle">Sample queries</Button>
++                  </MenuTrigger>
++                  <MenuPopover>
++                    <MenuList style={{ maxHeight: '400px', overflow: 'auto' }}>
++                      {getAllCategories().map(category => (
++                        <div key={category}>
++                          <div className={styles.queryCategory}>{category}</div>
++                          {getQueriesByCategory(category).map(q => (
++                            <MenuItem
++                              key={q.id}
++                              onClick={() => handleSelectPrecannedQuery(q)}
++                              secondaryContent={q.description}
++                            >
++                              {q.name}
++                            </MenuItem>
++                          ))}
++                        </div>
++                      ))}
++                    </MenuList>
++                  </MenuPopover>
++                </Menu>
+               </div>
+               <div className={styles.toolbarRight}>
+                 <Button appearance="subtle" icon={<Save24Regular />}>Save</Button>
+-                <Button appearance="subtle" icon={<Clock24Regular />}>Query history</Button>
++                <Menu open={showHistory} onOpenChange={(_, data) => setShowHistory(data.open)}>
++                  <MenuTrigger disableButtonEnhancement>
++                    <Button appearance="subtle" icon={<Clock24Regular />}>History</Button>
++                  </MenuTrigger>
++                  <MenuPopover>
++                    <MenuList style={{ maxHeight: '400px', overflow: 'auto', minWidth: '350px' }}>
++                      {history.length === 0 ? (
++                        <MenuItem disabled>No query history</MenuItem>
++                      ) : (
++                        <>
++                          <MenuItem onClick={clearHistory}>Clear history</MenuItem>
++                          {history.slice(0, 20).map(item => (
++                            <MenuItem
++                              key={item.id}
++                              onClick={() => handleSelectHistoryItem(item.query)}
++                              secondaryContent={`${formatTimestamp(item.timestamp)}${item.rowCount !== undefined ? ` · ${item.rowCount} rows` : ''}${item.error ? ' · Error' : ''}`}
++                            >
++                              <span style={{ fontFamily: 'monospace', fontSize: '12px' }}>
++                                {item.query.substring(0, 50)}{item.query.length > 50 ? '...' : ''}
++                              </span>
++                            </MenuItem>
++                          ))}
++                        </>
++                      )}
++                    </MenuList>
++                  </MenuPopover>
++                </Menu>
+                 <Button appearance="subtle" icon={<ArrowDownload24Regular />}>Export</Button>
+               </div>
+             </div>
+ 
++            {error && (
++              <div className={styles.errorMessage}>
++                <strong>Error:</strong> {error}
++              </div>
++            )}
++
+             <div className={styles.editorContainer}>
+               <div className={styles.editorHeader}>
+                 <div className={styles.editorTabs}>
+@@ -241,46 +430,22 @@ export function Logs() {
+                   <button className={styles.editorTab}>+ New query</button>
+                 </div>
+               </div>
+-              <div className={styles.editor}>
+-                <code>
+-                  <span className={styles.keyword}>SecurityEvent</span>
+-                  <br />
+-                  <span className={styles.operator}>| </span>
+-                  <span className={styles.keyword}>where</span>
+-                  <span> TimeGenerated </span>
+-                  <span className={styles.operator}>&gt;</span>
+-                  <span> </span>
+-                  <span className={styles.function}>ago</span>
+-                  <span>(</span>
+-                  <span className={styles.number}>24h</span>
+-                  <span>)</span>
+-                  <br />
+-                  <span className={styles.operator}>| </span>
+-                  <span className={styles.keyword}>where</span>
+-                  <span> EventID </span>
+-                  <span className={styles.operator}>==</span>
+-                  <span> </span>
+-                  <span className={styles.number}>4625</span>
+-                  <br />
+-                  <span className={styles.operator}>| </span>
+-                  <span className={styles.keyword}>summarize</span>
+-                  <span> </span>
+-                  <span className={styles.function}>count</span>
+-                  <span>() </span>
+-                  <span className={styles.keyword}>by</span>
+-                  <span> Account, Computer</span>
+-                  <br />
+-                  <span className={styles.operator}>| </span>
+-                  <span className={styles.keyword}>order by</span>
+-                  <span> count_ </span>
+-                  <span className={styles.keyword}>desc</span>
+-                  <br />
+-                  <span className={styles.operator}>| </span>
+-                  <span className={styles.keyword}>take</span>
+-                  <span> </span>
+-                  <span className={styles.number}>100</span>
+-                </code>
+-              </div>
++              <Editor
++                height="200px"
++                language="plaintext"
++                theme="vs-dark"
++                value={query}
++                onChange={(value) => setQuery(value || '')}
++                options={{
++                  minimap: { enabled: false },
++                  fontSize: 14,
++                  fontFamily: 'Consolas, Monaco, monospace',
++                  lineNumbers: 'on',
++                  scrollBeyondLastLine: false,
++                  wordWrap: 'on',
++                  automaticLayout: true,
++                }}
++              />
+             </div>
+           </div>
+ 
+@@ -288,7 +453,7 @@ export function Logs() {
+           <div className={styles.resultsSection}>
+             <div className={styles.resultsHeader}>
+               <div className={styles.resultsInfo}>
+-                Results: {sortedEvents.length} rows returned
++                Results: {results.rows.length} rows returned
+               </div>
+               <div className={styles.toolbarRight}>
+                 <Button appearance="subtle" size="small">Columns</Button>
+@@ -297,27 +462,30 @@ export function Logs() {
+             </div>
+ 
+             <div className={styles.resultsTable}>
+-              <div className={styles.tableHeader}>
+-                <div className={styles.tableHeaderCell}>TimeGenerated</div>
+-                <div className={styles.tableHeaderCell}>EventID</div>
+-                <div className={styles.tableHeaderCell}>Computer</div>
+-                <div className={styles.tableHeaderCell}>Account</div>
+-                <div className={styles.tableHeaderCell}>Activity</div>
+-              </div>
+-
+-              {sortedEvents.map((event) => (
+-                <div key={event.id} className={styles.tableRow}>
+-                  <div className={styles.tableCell}>{formatTimestamp(event.timeGenerated)}</div>
+-                  <div className={styles.tableCell}>{event.eventID}</div>
+-                  <div className={styles.tableCell}>{event.computer}</div>
+-                  <div className={styles.tableCell}>{event.account}</div>
+-                  <div className={styles.tableCell}>{event.activity}</div>
++              {isRunning ? (
++                <div className={styles.loadingOverlay}>
++                  <Spinner size="medium" label="Running query..." />
+                 </div>
+-              ))}
+-
+-              {sortedEvents.length === 0 && (
++              ) : results.columns.length > 0 ? (
++                <>
++                  <div className={styles.tableHeader}>
++                    {results.columns.map((col) => (
++                      <div key={col} className={styles.tableHeaderCell}>{col}</div>
++                    ))}
++                  </div>
++                  {results.rows.map((row, idx) => (
++                    <div key={idx} className={styles.tableRow}>
++                      {results.columns.map((col) => (
++                        <div key={col} className={styles.tableCell}>
++                          {formatValue(row[col])}
++                        </div>
++                      ))}
++                    </div>
++                  ))}
++                </>
++              ) : (
+                 <div style={{ padding: '24px', textAlign: 'center', color: '#a19f9d' }}>
+-                  No log entries to display. Run a query to see results.
++                  {error ? 'Query failed. Please check the error above.' : 'Run a query to see results.'}
+                 </div>
+               )}
+             </div>
+@@ -326,12 +494,38 @@ export function Logs() {
+ 
+         {/* Schema Sidebar */}
+         <div className={styles.schemaSidebar}>
+-          <div className={styles.schemaTitle}>Tables</div>
+-          {tables.map((table) => (
+-            <div key={table} className={styles.schemaTable}>
+-              {table}
+-            </div>
+-          ))}
++          <div className={styles.panelHeader}>
++            <span className={styles.panelTitle}>Tables</span>
++          </div>
++          <div className={styles.schemaSection}>
++            {tables.map((table) => (
++              <div
++                key={table}
++                className={styles.schemaTable}
++                onClick={() => handleTableClick(table)}
++                style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
++              >
++                <ChevronRight20Regular />
++                {table}
++              </div>
++            ))}
++          </div>
++
++          <div className={styles.panelHeader}>
++            <span className={styles.panelTitle}>Sample Queries</span>
++          </div>
++          <div className={styles.schemaSection}>
++            {precannedQueries.slice(0, 5).map((q) => (
++              <div
++                key={q.id}
++                className={styles.precannedQuery}
++                onClick={() => handleSelectPrecannedQuery(q)}
++              >
++                <ChevronRight20Regular />
++                {q.name}
++              </div>
++            ))}
++          </div>
+         </div>
+       </div>
+     </div>
+diff --git a/frontend/vite.config.ts b/frontend/vite.config.ts
+index 8b0f57b..230c90b 100644
+--- a/frontend/vite.config.ts
++++ b/frontend/vite.config.ts
+@@ -4,4 +4,16 @@ import react from '@vitejs/plugin-react'
+ // https://vite.dev/config/
+ export default defineConfig({
+   plugins: [react()],
++  build: {
++    sourcemap: false,
++    rollupOptions: {
++      output: {
++        manualChunks: {
++          vendor: ['react', 'react-dom', 'react-router-dom'],
++          ui: ['@fluentui/react-components', '@fluentui/react-icons'],
++          editor: ['@monaco-editor/react'],
++        },
++      },
++    },
++  },
+ })
