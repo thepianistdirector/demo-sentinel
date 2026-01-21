@@ -1,0 +1,9 @@
+--- Pull attempt 1 ---
+Error: api error: status 404, content: {
+  "error": {
+    "code": 404,
+    "message": "Requested entity was not found.",
+    "status": "NOT_FOUND"
+  }
+}
+

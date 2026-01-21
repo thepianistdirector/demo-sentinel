@@ -1,0 +1,43 @@
+=== Attempt 1: pipe to gemini ===
+Command: printf prompt | gemini
+---
+[ERROR] [ImportProcessor] Failed to import ts-ignore`: ENOENT: no such file or directory, access '/home/lucas/.gemini/extensions/chrome-devtools-mcp/ts-ignore`'
+[ERROR] [ImportProcessor] Failed to import ts-nocheck`: ENOENT: no such file or directory, access '/home/lucas/.gemini/extensions/chrome-devtools-mcp/ts-nocheck`'
+[ERROR] [ImportProcessor] Failed to import ts-expect-error`: ENOENT: no such file or directory, access '/home/lucas/.gemini/extensions/chrome-devtools-mcp/ts-expect-error`'
+Loaded cached credentials.
+[ERROR] [ImportProcessor] Failed to import ts-ignore`: ENOENT: no such file or directory, access '/home/lucas/.gemini/extensions/chrome-devtools-mcp/ts-ignore`'
+[ERROR] [ImportProcessor] Failed to import ts-nocheck`: ENOENT: no such file or directory, access '/home/lucas/.gemini/extensions/chrome-devtools-mcp/ts-nocheck`'
+[ERROR] [ImportProcessor] Failed to import ts-expect-error`: ENOENT: no such file or directory, access '/home/lucas/.gemini/extensions/chrome-devtools-mcp/ts-expect-error`'
+Session cleanup disabled: Either maxAge or maxCount must be specified
+Loading extension: chrome-devtools-mcp
+Loading extension: code-review
+Loading extension: conductor
+Loading extension: context7
+Loading extension: exa-mcp-server
+Loading extension: gemini-cli-jules
+Loading extension: gemini-cli-security
+Loading extension: google-workspace
+Loading extension: mcp-toolbox-for-databases
+Loading extension: postgres
+Server 'julesServer' supports tool updates. Listening for changes...
+Server 'securityServer' supports tool updates. Listening for changes...
+Server 'osvScanner' supports tool updates. Listening for changes...
+Server 'exa' supports tool updates. Listening for changes...
+Server 'exa' supports resource updates. Listening for changes...
+Server 'github-local' supports tool updates. Listening for changes...
+Server 'github-local' supports resource updates. Listening for changes...
+🔔 Received tool update notification from 'github-local'
+🔔 Received resource update notification from 'github-local'
+Resources updated for server: github-local[INFO] Resources updated for server: github-local
+Tools changed, updating Gemini context...
+Tools updated for server: github-local[INFO] Tools updated for server: github-local
+Server 'google-workspace' supports tool updates. Listening for changes...
+Server 'memory' supports tool updates. Listening for changes...
+Server 'context7' supports tool updates. Listening for changes...
+Server 'filesystem' supports tool updates. Listening for changes...
+Server 'chrome-devtools' supports tool updates. Listening for changes...
+I will start by reading the existing frontend code to understand the project structure and dependencies, specifically `App.tsx`, `Layout.tsx`, `main.tsx`, and `package.json`.
+I will now create the mock authentication service `frontend/src/services/authService.ts` and the authentication context `frontend/src/contexts/AuthContext.tsx` to handle user state and login/logout functionality.
+Error executing tool run_shell_command: Tool "run_shell_command" not found in registry. Tools must use the exact names that are registered. Did you mean one of: "add_issue_comment", "get_commit", "list_commits"?
+I will invoke the `cli_help` agent to inquire about the available methods for creating and writing to files, as the standard `write_file` and `run_shell_command` tools appear to be missing from my current toolset.
+Error executing tool delegate_to_agent: Tool execution denied by policy.

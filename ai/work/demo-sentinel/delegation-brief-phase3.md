@@ -1,0 +1,80 @@
+# Delegation Brief: Phase 3 - Authentication
+
+## Summary
+
+Implement simple email/password authentication for the Demo Sentinel platform.
+
+## Context
+
+The frontend already exists at `frontend/` with React + TypeScript + Fluent UI v9.
+All Sentinel pages are implemented with mock data. Now we need auth.
+
+## Tasks
+
+### 1. Create Login Page (`frontend/src/pages/Login.tsx`)
+- Sentinel-styled login form with email and password fields
+- "Sign in" button
+- Error message display for invalid credentials
+- Match Azure portal login styling (dark theme)
+
+### 2. Create Auth Context (`frontend/src/contexts/AuthContext.tsx`)
+- React context for auth state
+- `user` object (email, role, dataSetId)
+- `login(email, password)` function
+- `logout()` function
+- `isAuthenticated` boolean
+- Persist auth state in localStorage
+
+### 3. Create Protected Route Component (`frontend/src/components/ProtectedRoute.tsx`)
+- Wrap routes that require authentication
+- Redirect to /login if not authenticated
+
+### 4. Update App.tsx
+- Add /login route
+- Wrap authenticated routes with ProtectedRoute
+- Add logout button to header
+
+### 5. Create Mock Auth Service (`frontend/src/services/authService.ts`)
+- Mock login function that validates against hardcoded users:
+  - admin@demo.com / admin123 (role: admin)
+  - client@demo.com / client123 (role: client, dataSetId: "healthcare")
+- Returns JWT-like token structure (can be fake for now)
+
+### 6. Update Layout Header
+- Show current user email in header
+- Add logout button/dropdown
+
+## Acceptance Criteria
+
+- [ ] Login page displays with Sentinel styling
+- [ ] Can login with mock credentials
+- [ ] Invalid credentials show error message
+- [ ] Authenticated state persists on page refresh
+- [ ] Logout clears state and redirects to login
+- [ ] Unauthenticated users are redirected to login
+- [ ] Build passes with no TypeScript errors
+
+## Technical Requirements
+
+- Use React Context API (no Redux needed)
+- Use localStorage for persistence
+- Match existing code style and patterns
+- No external auth libraries needed (simple implementation)
+
+## Files to Create/Modify
+
+- CREATE: `frontend/src/pages/Login.tsx`
+- CREATE: `frontend/src/contexts/AuthContext.tsx`
+- CREATE: `frontend/src/components/ProtectedRoute.tsx`
+- CREATE: `frontend/src/services/authService.ts`
+- MODIFY: `frontend/src/App.tsx`
+- MODIFY: `frontend/src/components/Layout.tsx`
+- MODIFY: `frontend/src/main.tsx` (wrap with AuthProvider)
+
+## Verification
+
+```bash
+cd frontend && npm run build
+```
+
+Build must pass with zero errors.

@@ -1,0 +1,4 @@
+ M ai/decisions.md
+ M ai/reviews/command-log.jsonl
+?? ai/work/demo-sentinel/delegation-brief-phase3.md
+?? ai/work/demo-sentinel/delegations/20260121-202357/

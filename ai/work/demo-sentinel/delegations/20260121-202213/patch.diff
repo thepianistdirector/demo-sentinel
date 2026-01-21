@@ -1,0 +1,101 @@
+diff --git a/ai/decisions.md b/ai/decisions.md
+index bb72919..20c9396 100644
+--- a/ai/decisions.md
++++ b/ai/decisions.md
+@@ -28,3 +28,35 @@
+ - Use git hooks to detect changes (rejected: adds dependencies)
+ 
+ **Files:** `~/.local/share/claude-code/scripts/ai/delegate*.sh`
++
++---
++
++## 2026-01-21: Verification Refinements
++
++**Context:** Initial verification implementation had false positives due to:
++1. Delegation artifacts being counted as "work"
++2. Jules preflight commits being counted as "work"
++3. BEFORE snapshot being taken once instead of per-engine
++
++**Decision:** Implement multi-layer verification with specific exclusions.
++
++**Changes:**
++1. BEFORE snapshot taken immediately before EACH engine runs
++2. Preflight commits (message contains "preflight") explicitly excluded from work detection
++3. Directories excluded from status comparison:
++   - `ai/delegations/`
++   - `ai/reviews/`
++   - `ai/work/*/delegations/`
++   - Current delegation directory
++4. File count comparison instead of raw string comparison
++
++**Tradeoffs:**
++- (+) No more false positives from preflight commits or artifacts
++- (+) Each engine evaluated independently against its own baseline
++- (-) Slightly more complex verification logic
++- (-) Preflight commits always ignored (can't use them as work indicator)
++
++**Verification Criteria:**
++- New non-preflight commit created
++- More files in working tree (outside excluded dirs)
++- Different files in status (actual new content)
+diff --git a/ai/reviews/command-log.jsonl b/ai/reviews/command-log.jsonl
+index ed6d198..63a4d56 100644
+--- a/ai/reviews/command-log.jsonl
++++ b/ai/reviews/command-log.jsonl
+@@ -70,3 +70,4 @@
+ {"ts": "2026-01-21T20:18:08Z", "cmd": "npm run build 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+ {"ts": "2026-01-21T20:21:36Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh test-jules-connected /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/test-brief.md 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+ {"ts": "2026-01-21T20:22:07Z", "cmd": "cat > /tmp/fix_jules_session.py << 'EOF'\n# Read the file\nwith open('/home/lucas/.local/share/claude-code/scripts/ai/delegate_jules.sh', 'r') as f:\n    content = f.read()\n\n# Find and replace the sessio", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:23:01Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+diff --git a/ai/work/demo-sentinel/delegations/20260121-202213/_tooling/github-preflight.stderr.log b/ai/work/demo-sentinel/delegations/20260121-202213/_tooling/github-preflight.stderr.log
+index 4d5d1e1..82fb5d1 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-202213/_tooling/github-preflight.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-202213/_tooling/github-preflight.stderr.log
+@@ -3,3 +3,6 @@
+ [preflight] Origin already set to GitHub: https://github.com/thepianistdirector/demo-sentinel.git
+ [preflight] Warning: current branch (master) != ACTIVE_BRANCH (main)
+ [preflight] Staging 37 files for preflight commit
++[preflight] Pushed branch master to origin
++[preflight] Report written to /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-202213/_tooling/github-preflight.json
++[preflight] Preflight complete
+diff --git a/ai/work/demo-sentinel/delegations/20260121-202213/_tooling/github-preflight.stdout.log b/ai/work/demo-sentinel/delegations/20260121-202213/_tooling/github-preflight.stdout.log
+index e69de29..f7778bd 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-202213/_tooling/github-preflight.stdout.log
++++ b/ai/work/demo-sentinel/delegations/20260121-202213/_tooling/github-preflight.stdout.log
+@@ -0,0 +1,12 @@
++{
++  "timestamp": "2026-01-21T20:22:13.677447+00:00",
++  "errors": [],
++  "git_root": "/home/lucas/code/demo-sentinel",
++  "owner": "thepianistdirector",
++  "repo": "demo-sentinel",
++  "original_origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "branch": "master",
++  "preflight_commit": "f95e129308d4400bdd98802bb1dc5ce07fef37fb",
++  "pushed": true
++}
+diff --git a/ai/work/demo-sentinel/delegations/20260121-202213/jules.stderr.log b/ai/work/demo-sentinel/delegations/20260121-202213/jules.stderr.log
+index 2d014c1..d52a3dd 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-202213/jules.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-202213/jules.stderr.log
+@@ -1,2 +1,19 @@
+ [jules] Found preflight script at global path
+ [jules] Running GitHub preflight: /home/lucas/.local/share/claude-code/scripts/ai/jules_preflight_github.py
++[jules] GitHub preflight succeeded
++[jules] Capturing Jules CLI help...
++[jules] Using repo: thepianistdirector/demo-sentinel
++[jules] Starting Jules remote session...
++[jules] Trying: echo prompt | jules remote new --repo thepianistdirector/demo-sentinel
++[jules] Session ID: 11471709320666029893
++[jules] Starting pull loop (timeout: 900s, interval: 30s)
++[jules] Pull attempt 1 (0s elapsed)...
++[jules] Jules pull reported error: Error: api error: status 404, content: {
++  "error": {
++    "code": 404,
++    "message": "Requested entity was not found.",
++    "status": "NOT_FOUND"
++  }
++}
++[jules] Changes detected outside delegation dir after pull
++[jules] Jules delegation complete

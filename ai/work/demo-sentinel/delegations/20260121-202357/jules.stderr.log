@@ -5,7 +5,7 @@
 [jules] Using repo: thepianistdirector/demo-sentinel
 [jules] Starting Jules remote session...
 [jules] Trying: echo prompt | jules remote new --repo thepianistdirector/demo-sentinel
-[jules] Session ID: 11471709320666029893
+[jules] Session ID: 8618051853059549798
 [jules] Starting pull loop (timeout: 900s, interval: 30s)
 [jules] Pull attempt 1 (0s elapsed)...
 [jules] Jules pull reported error: Error: api error: status 404, content: {
