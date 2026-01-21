@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   toolbar: { display: 'flex', gap: '12px', alignItems: 'center' },
   searchBox: { width: '300px' },
   grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' },
-  card: { backgroundColor: '#252423', border: '1px solid #323130', borderRadius: '8px', padding: '20px', cursor: 'pointer', ':hover': { borderColor: '#0078d4' } },
+  card: { backgroundColor: '#252423', border: '1px solid #323130', borderRadius: '8px', padding: '20px', cursor: 'pointer' },
   cardTitle: { fontSize: '16px', fontWeight: 600, color: '#ffffff', marginBottom: '8px' },
   cardDescription: { fontSize: '13px', color: '#a19f9d', lineHeight: '1.5' },
   cardMeta: { marginTop: '12px', fontSize: '12px', color: '#605e5c' },

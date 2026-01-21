@@ -35,14 +35,22 @@ ACTIVE_UPDATED_AT: 2026-01-21
 - [ ] AC7: Mobile Passable - Readable on tablet
 
 **Tasks:**
-- [ ] Phase 1: Project Setup
-- [ ] Phase 2: Core UI Components
+- [x] Phase 1: Project Setup (React + TypeScript + Vite + Fluent UI)
+- [x] Phase 2: Core UI Components (Layout, Sidebar, Navigation)
 - [ ] Phase 3: Authentication
 - [ ] Phase 4: Data Management
 - [ ] Phase 5: KQL Engine
-- [ ] Phase 6: Sentinel Pages
+- [x] Phase 6: Sentinel Pages (All pages created with mock data)
 - [ ] Phase 7: Infrastructure
 - [ ] Phase 8: Polish & Testing
+
+**Phase 1 & 2 & 6 Completed:**
+- React + TypeScript + Vite project initialized
+- Fluent UI v9 configured with dark theme
+- Sentinel-like layout with header and sidebar
+- All navigation sections implemented
+- 15 pages created: Overview, Incidents, Logs, Data Connectors, Analytics, Workbooks, Hunting, Entity Behavior, Threat Intelligence, MITRE ATT&CK, Content Hub, Automation, Watchlists, Notebooks, Settings
+- Build passes successfully
 
 ---
 
@@ -81,7 +89,11 @@ ACTIVE_UPDATED_AT: 2026-01-21
 1. **delegate_jules.sh**: Now looks for preflight script at global path (`$HOME/.local/share/claude-code/scripts/ai/`) first, then repo-local
 2. **delegate_codex.sh**: Complete rewrite with correct CLI syntax (`codex exec --full-auto`), proper logging, and verification
 3. **delegate_gemini.sh**: Complete rewrite with verification - detects false success by checking git changes and error patterns
-4. **delegate.sh**: Added pre/post git state tracking and verification function as safety net
+4. **delegate.sh**: Complete rewrite with:
+   - Per-engine BEFORE snapshots (taken right before each engine runs)
+   - Preflight commit detection (commits with "preflight" in message don't count as work)
+   - Proper exclusion of delegation artifacts and metadata directories
+   - Robust file counting and comparison
 
 **Tasks:**
 - [x] Fix delegate_jules.sh - global preflight path lookup
@@ -89,6 +101,13 @@ ACTIVE_UPDATED_AT: 2026-01-21
 - [x] Fix delegate_gemini.sh - add verification of actual changes
 - [x] Update delegate.sh - add verification safety net
 - [x] Backup scripts before changes
+- [x] E2E test verification - workflow correctly falls through Jules->Codex->Gemini
+
+**E2E Test Results:**
+- Jules: Preflight runs successfully, creates GitHub repo, but remote session fails (needs manual connection at jules.google.com). Preflight commit correctly ignored.
+- Codex: CLI invocation fails (environment-specific issue)
+- Gemini: Successfully completes work and verification passes
+- Claude Code: Falls through correctly when all other engines fail
 
 **Files Modified:**
 - `~/.local/share/claude-code/scripts/ai/delegate.sh`

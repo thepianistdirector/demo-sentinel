@@ -1,0 +1,7 @@
+ai/reviews/command-log.jsonl
+ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stderr.log
+ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stdout.log
+ai/work/demo-sentinel/delegations/20260121-201640/jules.stderr.log
+frontend/src/pages/DataConnectors.tsx
+frontend/src/pages/MitreAttack.tsx
+frontend/src/pages/Workbooks.tsx

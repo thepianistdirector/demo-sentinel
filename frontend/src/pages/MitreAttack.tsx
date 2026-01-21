@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   tacticRow: { display: 'flex', gap: '8px', marginBottom: '8px' },
   tacticHeader: { minWidth: '140px', padding: '8px 12px', backgroundColor: '#0078d4', borderRadius: '4px', fontSize: '12px', fontWeight: 600, color: '#ffffff', textAlign: 'center' },
   techniqueCell: { minWidth: '140px', padding: '8px 12px', backgroundColor: '#1b1a19', borderRadius: '4px', fontSize: '11px', color: '#d2d0ce', border: '1px solid #323130' },
-  techniqueActive: { backgroundColor: '#442726', borderColor: '#f87c7c' },
+  techniqueActive: { backgroundColor: '#442726', border: '1px solid #f87c7c' },
   legend: { display: 'flex', gap: '24px', marginTop: '16px' },
   legendItem: { display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#a19f9d' },
   legendBox: { width: '16px', height: '16px', borderRadius: '4px' },

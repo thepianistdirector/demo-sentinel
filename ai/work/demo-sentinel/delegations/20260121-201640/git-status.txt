@@ -1,0 +1,32 @@
+ M ai/reviews/command-log.jsonl
+ M ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stderr.log
+ M ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stdout.log
+ M ai/work/demo-sentinel/delegations/20260121-201640/jules.stderr.log
+ M frontend/src/pages/DataConnectors.tsx
+ M frontend/src/pages/MitreAttack.tsx
+ M frontend/src/pages/Workbooks.tsx
+?? ai/work/demo-sentinel/delegations/20260121-201640/_tooling/codex-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/_tooling/gemini-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.json
+?? ai/work/demo-sentinel/delegations/20260121-201640/_tooling/jules-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/_tooling/jules-remote-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/_tooling/jules-remote-new-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/_tooling/jules-remote-pull-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/changed-files.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/codex-git-hash-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/codex-git-status-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/codex.attempt.log
+?? ai/work/demo-sentinel/delegations/20260121-201640/codex.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-201640/codex.stdout.log
+?? ai/work/demo-sentinel/delegations/20260121-201640/gemini-changes.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/gemini-git-hash-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/gemini-git-status-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/gemini.attempt.log
+?? ai/work/demo-sentinel/delegations/20260121-201640/gemini.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-201640/gemini.stdout.log
+?? ai/work/demo-sentinel/delegations/20260121-201640/git-status.txt
+?? ai/work/demo-sentinel/delegations/20260121-201640/handoff-summary.md
+?? ai/work/demo-sentinel/delegations/20260121-201640/jules-pull.log
+?? ai/work/demo-sentinel/delegations/20260121-201640/jules-remote-new.log
+?? ai/work/demo-sentinel/delegations/20260121-201640/jules.session_id
+?? ai/work/demo-sentinel/delegations/20260121-201640/selected-engine.txt

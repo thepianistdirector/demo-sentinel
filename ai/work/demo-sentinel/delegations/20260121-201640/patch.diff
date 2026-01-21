@@ -1,0 +1,140 @@
+diff --git a/ai/reviews/command-log.jsonl b/ai/reviews/command-log.jsonl
+index e943441..1985ede 100644
+--- a/ai/reviews/command-log.jsonl
++++ b/ai/reviews/command-log.jsonl
+@@ -29,3 +29,39 @@
+ {"ts": "2026-01-21T20:06:35Z", "cmd": "echo \"=== delegate_codex.sh (invocation section) ===\" && grep -A 5 \"Attempt 1:\" ~/.local/share/claude-code/scripts/ai/delegate_codex.sh", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+ {"ts": "2026-01-21T20:06:35Z", "cmd": "echo \"=== delegate.sh (verification function) ===\" && grep -A 15 \"verify_work_done()\" ~/.local/share/claude-code/scripts/ai/delegate.sh", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+ {"ts": "2026-01-21T20:06:35Z", "cmd": "echo \"=== delegate_jules.sh (preflight section) ===\" && grep -A 20 \"Step 2: Run GitHub preflight\" ~/.local/share/claude-code/scripts/ai/delegate_jules.sh | head -25", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:07:20Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh test-delegation /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/test-brief.md 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:07:26Z", "cmd": "ls -la /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-200708/", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:07:26Z", "cmd": "find ai -type d -name \"delegations\" 2>/dev/null", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:07:30Z", "cmd": "find ai -type d 2>/dev/null", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:07:34Z", "cmd": "ls -la ai/", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:07:40Z", "cmd": "mkdir -p ai/work/demo-sentinel/delegations/20260121-200708 ai/memory ai/reviews ai/delegations", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:07:55Z", "cmd": "touch ai/work/demo-sentinel/delegations/20260121-200708/handoff-summary.md ai/work/demo-sentinel/delegations/20260121-200708/changed-files.txt ai/work/demo-sentinel/delegations/20260121-200708/patch.d", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:08:22Z", "cmd": "cat > /tmp/fix_delegate_v2.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\n# Delegation Orchestrator Script (Global Version)\n#\n# Engine order: Jules -> Codex -> Gemini -> Claude Code\n#\n# Works o", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:08:37Z", "cmd": "cat > /tmp/fix_jules_v2.py << 'EOF'\nimport re\n\n# Read the file\nwith open('/home/lucas/.local/share/claude-code/scripts/ai/delegate_jules.sh', 'r') as f:\n    content = f.read()\n\n# Find and replace the ", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:08:58Z", "cmd": "cat > /tmp/fix_codex_v2.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\nROOT=\"$(git rev-parse --show-toplevel 2>/dev/null || pwd)\"\nDELEG_DIR=\"${AI_DELEGATION_DIR:?AI_DELEGATION_DIR not set}\"\nDEL", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:09:17Z", "cmd": "cat > /tmp/fix_gemini_v2.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\nROOT=\"$(git rev-parse --show-toplevel 2>/dev/null || pwd)\"\nDELEG_DIR=\"${AI_DELEGATION_DIR:?AI_DELEGATION_DIR not set}\"\nDE", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:09:41Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh test-delegation-v2 /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/test-brief.md 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:09:41Z", "cmd": "mkdir -p ai/work/demo-sentinel/delegations/20260121-200929 && touch ai/work/demo-sentinel/delegations/20260121-200929/{handoff-summary.md,changed-files.txt,patch.diff,selected-engine.txt}", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:10:05Z", "cmd": "git -C /home/lucas/code/demo-sentinel status --porcelain | head -30", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:10:24Z", "cmd": "cat > /tmp/fix_delegate_v3.py << 'EOF'\nimport re\n\n# Read the file\nwith open('/home/lucas/.local/share/claude-code/scripts/ai/delegate.sh', 'r') as f:\n    content = f.read()\n\n# Update the verification ", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:10:43Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh test-v3 /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/test-brief.md 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:10:50Z", "cmd": "mkdir -p ai/work/demo-sentinel/delegations/20260121-201031 && echo \"claude-code\" > ai/work/demo-sentinel/delegations/20260121-201031/selected-engine.txt && echo \"frontend/src/pages/*.tsx\" > ai/work/de", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:11:33Z", "cmd": "cat > /tmp/fix_delegate_v4.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\n# Delegation Orchestrator Script (Global Version)\n#\n# Engine order: Jules -> Codex -> Gemini -> Claude Code\n#\n# Works o", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:11:59Z", "cmd": "mkdir -p ai/work/demo-sentinel/delegations/20260121-201140 && echo \"claude-code\" > ai/work/demo-sentinel/delegations/20260121-201140/selected-engine.txt && echo \"frontend/src/pages/*.tsx\" > ai/work/de", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:12:20Z", "cmd": "ls -la /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:12:26Z", "cmd": "ls -la /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-201140/", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:12:33Z", "cmd": "cat > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-201140/handoff-summary.md << 'EOF'\n# Handoff Summary\n\n- Engine: claude-code\n- Delegation dir: /home/lucas/code/demo-sent", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:13:27Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh test-v4 /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/test-brief.md 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:13:37Z", "cmd": "git -C /home/lucas/code/demo-sentinel log -1 --oneline && ls -la /home/lucas/code/demo-sentinel/test-delegation.txt 2>/dev/null || echo \"test file not found\"", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:13:46Z", "cmd": "git -C /home/lucas/code/demo-sentinel show --stat HEAD", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:13:53Z", "cmd": "git -C /home/lucas/code/demo-sentinel status test-delegation.txt", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:15:00Z", "cmd": "cat > /tmp/fix_delegate_v5.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\n# Delegation Orchestrator Script (Global Version)\n#\n# Engine order: Jules -> Codex -> Gemini -> Claude Code\n#\n# Works o", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:15:18Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh test-v5 /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/test-brief.md 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:15:25Z", "cmd": "cat > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-201507/handoff-summary.md << 'EOF'\n# Handoff Summary\n\n- Engine: claude-code\n- Timestamp: 20260121-201507\n\n## Status\n\nCla", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:15:36Z", "cmd": "cat > /tmp/fix_verify.py << 'EOF'\nimport re\n\n# Read the file\nwith open('/home/lucas/.local/share/claude-code/scripts/ai/delegate.sh', 'r') as f:\n    content = f.read()\n\n# Find the commit verification ", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:15:48Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-201542 && cat > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-201542/handoff-summary.md <", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:15:53Z", "cmd": "~/.local/share/claude-code/scripts/ai/delegate.sh test-v6 /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/test-brief.md 2>&1", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:16:08Z", "cmd": "npx tsc --noEmit 2>&1 | head -30", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:16:15Z", "cmd": "npx tsc --noEmit 2>&1 | head -30", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:16:35Z", "cmd": "cat > /tmp/fix_delegate_final.sh << 'SCRIPT'\n#!/usr/bin/env bash\nset -euo pipefail\n\n# Delegation Orchestrator Script (Global Version)\n#\n# Engine order: Jules -> Codex -> Gemini -> Claude Code\n#\n# Work", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
++{"ts": "2026-01-21T20:17:18Z", "cmd": "mkdir -p /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-201640 && cat > /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-201640/handoff-summary.md <", "exit_code": 0, "stdout_head": "", "stderr_head": ""}
+diff --git a/ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stderr.log b/ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stderr.log
+index 1f782d3..d0a3137 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stderr.log
+@@ -3,3 +3,6 @@
+ [preflight] Origin already set to GitHub: https://github.com/thepianistdirector/demo-sentinel.git
+ [preflight] Warning: current branch (master) != ACTIVE_BRANCH (main)
+ [preflight] Staging 20 files for preflight commit
++[preflight] Pushed branch master to origin
++[preflight] Report written to /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.json
++[preflight] Preflight complete
+diff --git a/ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stdout.log b/ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stdout.log
+index e69de29..f8aab50 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stdout.log
++++ b/ai/work/demo-sentinel/delegations/20260121-201640/_tooling/github-preflight.stdout.log
+@@ -0,0 +1,12 @@
++{
++  "timestamp": "2026-01-21T20:16:40.898811+00:00",
++  "errors": [],
++  "git_root": "/home/lucas/code/demo-sentinel",
++  "owner": "thepianistdirector",
++  "repo": "demo-sentinel",
++  "original_origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "origin": "https://github.com/thepianistdirector/demo-sentinel.git",
++  "branch": "master",
++  "preflight_commit": "5aacd83bdccdeead2ef2d3b1a14f697b26b2a8d7",
++  "pushed": true
++}
+diff --git a/ai/work/demo-sentinel/delegations/20260121-201640/jules.stderr.log b/ai/work/demo-sentinel/delegations/20260121-201640/jules.stderr.log
+index 2d014c1..c7f4c5b 100644
+--- a/ai/work/demo-sentinel/delegations/20260121-201640/jules.stderr.log
++++ b/ai/work/demo-sentinel/delegations/20260121-201640/jules.stderr.log
+@@ -1,2 +1,19 @@
+ [jules] Found preflight script at global path
+ [jules] Running GitHub preflight: /home/lucas/.local/share/claude-code/scripts/ai/jules_preflight_github.py
++[jules] GitHub preflight succeeded
++[jules] Capturing Jules CLI help...
++[jules] Using repo: thepianistdirector/demo-sentinel
++[jules] Starting Jules remote session...
++[jules] Trying: echo prompt | jules remote new --repo thepianistdirector/demo-sentinel
++[jules] Session ID: is
++[jules] Starting pull loop (timeout: 900s, interval: 30s)
++[jules] Pull attempt 1 (0s elapsed)...
++[jules] Jules pull reported error: Error: api error: status 404, content: {
++  "error": {
++    "code": 404,
++    "message": "Requested entity was not found.",
++    "status": "NOT_FOUND"
++  }
++}
++[jules] Changes detected outside delegation dir after pull
++[jules] Jules delegation complete
+diff --git a/frontend/src/pages/DataConnectors.tsx b/frontend/src/pages/DataConnectors.tsx
+index 3091248..69a7298 100644
+--- a/frontend/src/pages/DataConnectors.tsx
++++ b/frontend/src/pages/DataConnectors.tsx
+@@ -66,13 +66,6 @@ const useStyles = makeStyles({
+     flexDirection: 'column',
+     gap: '12px',
+     cursor: 'pointer',
+-    transitionProperty: 'border-color',
+-    transitionDuration: '0.2s',
+-  },
+-  connectorCardHover: {
+-    '&:hover': {
+-      borderColor: '#0078d4',
+-    },
+   },
+   connectorHeader: {
+     display: 'flex',
+diff --git a/frontend/src/pages/MitreAttack.tsx b/frontend/src/pages/MitreAttack.tsx
+index 7030500..2a0a61f 100644
+--- a/frontend/src/pages/MitreAttack.tsx
++++ b/frontend/src/pages/MitreAttack.tsx
+@@ -8,7 +8,7 @@ const useStyles = makeStyles({
+   tacticRow: { display: 'flex', gap: '8px', marginBottom: '8px' },
+   tacticHeader: { minWidth: '140px', padding: '8px 12px', backgroundColor: '#0078d4', borderRadius: '4px', fontSize: '12px', fontWeight: 600, color: '#ffffff', textAlign: 'center' },
+   techniqueCell: { minWidth: '140px', padding: '8px 12px', backgroundColor: '#1b1a19', borderRadius: '4px', fontSize: '11px', color: '#d2d0ce', border: '1px solid #323130' },
+-  techniqueActive: { backgroundColor: '#442726', borderColor: '#f87c7c' },
++  techniqueActive: { backgroundColor: '#442726', border: '1px solid #f87c7c' },
+   legend: { display: 'flex', gap: '24px', marginTop: '16px' },
+   legendItem: { display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#a19f9d' },
+   legendBox: { width: '16px', height: '16px', borderRadius: '4px' },
+diff --git a/frontend/src/pages/Workbooks.tsx b/frontend/src/pages/Workbooks.tsx
+index eaae83b..bf2e1a0 100644
+--- a/frontend/src/pages/Workbooks.tsx
++++ b/frontend/src/pages/Workbooks.tsx
+@@ -8,7 +8,7 @@ const useStyles = makeStyles({
+   toolbar: { display: 'flex', gap: '12px', alignItems: 'center' },
+   searchBox: { width: '300px' },
+   grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' },
+-  card: { backgroundColor: '#252423', border: '1px solid #323130', borderRadius: '8px', padding: '20px', cursor: 'pointer', ':hover': { borderColor: '#0078d4' } },
++  card: { backgroundColor: '#252423', border: '1px solid #323130', borderRadius: '8px', padding: '20px', cursor: 'pointer' },
+   cardTitle: { fontSize: '16px', fontWeight: 600, color: '#ffffff', marginBottom: '8px' },
+   cardDescription: { fontSize: '13px', color: '#a19f9d', lineHeight: '1.5' },
+   cardMeta: { marginTop: '12px', fontSize: '12px', color: '#605e5c' },
