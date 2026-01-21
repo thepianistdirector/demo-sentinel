@@ -3,6 +3,7 @@ import {
   Search24Regular,
   ArrowSync24Regular,
 } from '@fluentui/react-icons'
+import { useData } from '../contexts/DataContext'
 
 const useStyles = makeStyles({
   root: {
@@ -64,9 +65,6 @@ const useStyles = makeStyles({
     padding: '12px 16px',
     borderBottom: '1px solid #323130',
     cursor: 'pointer',
-    ':hover': {
-      backgroundColor: '#252423',
-    },
   },
   tableCell: {
     fontSize: '14px',
@@ -125,9 +123,6 @@ const useStyles = makeStyles({
   incidentId: {
     color: '#0078d4',
     cursor: 'pointer',
-    ':hover': {
-      textDecoration: 'underline',
-    },
   },
   pagination: {
     display: 'flex',
@@ -142,37 +137,43 @@ const useStyles = makeStyles({
   },
 })
 
-const mockIncidents = [
-  { id: 'INC-001', severity: 'high', title: 'Suspicious login from unknown location', status: 'new', owner: 'John Doe', created: '2 hours ago', alerts: 5 },
-  { id: 'INC-002', severity: 'high', title: 'Multiple failed authentication attempts', status: 'active', owner: 'Jane Smith', created: '4 hours ago', alerts: 12 },
-  { id: 'INC-003', severity: 'medium', title: 'Anomalous network traffic detected', status: 'active', owner: 'Unassigned', created: '6 hours ago', alerts: 3 },
-  { id: 'INC-004', severity: 'low', title: 'New device enrolled in network', status: 'closed', owner: 'Mike Johnson', created: '8 hours ago', alerts: 1 },
-  { id: 'INC-005', severity: 'high', title: 'Potential ransomware activity detected', status: 'new', owner: 'Unassigned', created: '1 day ago', alerts: 8 },
-  { id: 'INC-006', severity: 'medium', title: 'Unusual outbound data transfer', status: 'active', owner: 'Sarah Wilson', created: '1 day ago', alerts: 4 },
-  { id: 'INC-007', severity: 'info', title: 'Security policy update required', status: 'new', owner: 'Unassigned', created: '2 days ago', alerts: 1 },
-  { id: 'INC-008', severity: 'medium', title: 'Deprecated TLS version in use', status: 'closed', owner: 'DevOps Team', created: '3 days ago', alerts: 2 },
-]
+function formatTimeAgo(dateString: string): string {
+  const date = new Date(dateString)
+  const now = new Date()
+  const diffMs = now.getTime() - date.getTime()
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+  const diffDays = Math.floor(diffHours / 24)
+
+  if (diffDays > 0) return `${diffDays}d ago`
+  if (diffHours > 0) return `${diffHours}h ago`
+  return 'Just now'
+}
 
 export function Incidents() {
   const styles = useStyles()
+  const { incidents } = useData()
 
   const getSeverityStyle = (severity: string) => {
     switch (severity) {
-      case 'high': return styles.severityHigh
-      case 'medium': return styles.severityMedium
-      case 'low': return styles.severityLow
+      case 'High': return styles.severityHigh
+      case 'Medium': return styles.severityMedium
+      case 'Low': return styles.severityLow
       default: return styles.severityInfo
     }
   }
 
   const getStatusStyle = (status: string) => {
     switch (status) {
-      case 'new': return styles.statusNew
-      case 'active': return styles.statusActive
-      case 'closed': return styles.statusClosed
+      case 'New': return styles.statusNew
+      case 'Active': return styles.statusActive
+      case 'Closed': return styles.statusClosed
       default: return ''
     }
   }
+
+  const sortedIncidents = [...incidents].sort(
+    (a, b) => new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime()
+  )
 
   return (
     <div className={styles.root}>
@@ -221,14 +222,14 @@ export function Incidents() {
           <div className={styles.tableHeaderCell}>Created</div>
         </div>
 
-        {mockIncidents.map((incident) => (
+        {sortedIncidents.map((incident) => (
           <div key={incident.id} className={styles.tableRow}>
             <div className={styles.tableCell}>
               <input type="checkbox" className={styles.checkbox} />
             </div>
             <div className={styles.tableCell}>
               <span className={`${styles.severityBadge} ${getSeverityStyle(incident.severity)}`}>
-                {incident.severity.charAt(0).toUpperCase() + incident.severity.slice(1)}
+                {incident.severity}
               </span>
             </div>
             <div className={styles.tableCell}>
@@ -239,18 +240,24 @@ export function Incidents() {
             </div>
             <div className={styles.tableCell}>
               <span className={`${styles.statusBadge} ${getStatusStyle(incident.status)}`}>
-                {incident.status.charAt(0).toUpperCase() + incident.status.slice(1)}
+                {incident.status}
               </span>
             </div>
-            <div className={styles.tableCell}>{incident.alerts}</div>
-            <div className={styles.tableCell}>{incident.owner}</div>
-            <div className={styles.tableCell}>{incident.created}</div>
+            <div className={styles.tableCell}>{incident.alertCount}</div>
+            <div className={styles.tableCell}>{incident.owner || 'Unassigned'}</div>
+            <div className={styles.tableCell}>{formatTimeAgo(incident.createdTime)}</div>
           </div>
         ))}
+
+        {sortedIncidents.length === 0 && (
+          <div style={{ padding: '24px', textAlign: 'center', color: '#a19f9d' }}>
+            No incidents to display
+          </div>
+        )}
       </div>
 
       <div className={styles.pagination}>
-        <div className={styles.paginationInfo}>Showing 1-8 of 23 incidents</div>
+        <div className={styles.paginationInfo}>Showing 1-{sortedIncidents.length} of {incidents.length} incidents</div>
         <div className={styles.filterGroup}>
           <Button appearance="subtle" disabled>Previous</Button>
           <Button appearance="subtle">Next</Button>

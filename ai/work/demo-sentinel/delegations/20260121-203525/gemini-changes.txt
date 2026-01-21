@@ -1,0 +1,21 @@
+ M ai/reviews/command-log.jsonl
+ M ai/work/demo-sentinel/delegations/20260121-203439/codex.attempt.log
+ M ai/work/demo-sentinel/delegations/20260121-203439/codex.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-203439/_tooling/gemini-help.txt
+?? ai/work/demo-sentinel/delegations/20260121-203439/changed-files.txt
+?? ai/work/demo-sentinel/delegations/20260121-203439/claude-code-handoff.md
+?? ai/work/demo-sentinel/delegations/20260121-203439/claude-code-selected-at.txt
+?? ai/work/demo-sentinel/delegations/20260121-203439/claude_code-git-hash-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-203439/claude_code-git-status-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-203439/claude_code.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-203439/claude_code.stdout.log
+?? ai/work/demo-sentinel/delegations/20260121-203439/gemini-changes.txt
+?? ai/work/demo-sentinel/delegations/20260121-203439/gemini-git-hash-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-203439/gemini-git-status-before.txt
+?? ai/work/demo-sentinel/delegations/20260121-203439/gemini.attempt.log
+?? ai/work/demo-sentinel/delegations/20260121-203439/gemini.stderr.log
+?? ai/work/demo-sentinel/delegations/20260121-203439/gemini.stdout.log
+?? ai/work/demo-sentinel/delegations/20260121-203439/git-status.txt
+?? ai/work/demo-sentinel/delegations/20260121-203439/handoff-summary.md
+?? ai/work/demo-sentinel/delegations/20260121-203439/patch.diff
+?? ai/work/demo-sentinel/delegations/20260121-203439/selected-engine.txt

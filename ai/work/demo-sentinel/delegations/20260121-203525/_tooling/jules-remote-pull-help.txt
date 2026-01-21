@@ -1,0 +1,16 @@
+Pull the result of a remote session
+
+Usage:
+  jules remote pull [flags]
+
+Examples:
+jules remote pull --session 123456
+jules remote pull --session 123456 --apply
+
+Flags:
+      --apply            Apply the patch to the local repository
+  -h, --help             help for pull
+      --session string   The ID of the session you want to pull
+
+Global Flags:
+      --theme string   Which theme to use, dark/light (default "dark")

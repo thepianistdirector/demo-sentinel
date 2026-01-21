@@ -5,6 +5,7 @@ import {
   DataUsage24Regular,
   ArrowTrending24Regular,
 } from '@fluentui/react-icons'
+import { useData } from '../contexts/DataContext'
 
 const useStyles = makeStyles({
   root: {
@@ -122,9 +123,6 @@ const useStyles = makeStyles({
     backgroundColor: '#1b1a19',
     borderRadius: '4px',
     cursor: 'pointer',
-    ':hover': {
-      backgroundColor: '#323130',
-    },
   },
   incidentSeverity: {
     width: '4px',
@@ -140,6 +138,9 @@ const useStyles = makeStyles({
   severityLow: {
     backgroundColor: '#0078d4',
   },
+  severityInfo: {
+    backgroundColor: '#a19f9d',
+  },
   incidentInfo: {
     flex: 1,
   },
@@ -153,13 +154,55 @@ const useStyles = makeStyles({
     color: '#a19f9d',
     marginTop: '4px',
   },
+  dataSetBanner: {
+    backgroundColor: '#0e3a5c',
+    padding: '8px 16px',
+    borderRadius: '4px',
+    fontSize: '13px',
+    color: '#4fc3f7',
+    marginBottom: '8px',
+  },
 })
+
+function formatTimeAgo(dateString: string): string {
+  const date = new Date(dateString)
+  const now = new Date()
+  const diffMs = now.getTime() - date.getTime()
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+  const diffDays = Math.floor(diffHours / 24)
+
+  if (diffDays > 0) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
+  if (diffHours > 0) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
+  return 'Just now'
+}
 
 export function Overview() {
   const styles = useStyles()
+  const { incidents, alerts, currentDataSet, connectors } = useData()
+
+  const activeIncidents = incidents.filter(i => i.status !== 'Closed')
+  const highSeverityIncidents = incidents.filter(i => i.severity === 'High' && i.status !== 'Closed')
+  const recentIncidents = [...incidents]
+    .sort((a, b) => new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime())
+    .slice(0, 4)
+
+  const getSeverityStyle = (severity: string) => {
+    switch (severity) {
+      case 'High': return styles.severityHigh
+      case 'Medium': return styles.severityMedium
+      case 'Low': return styles.severityLow
+      default: return styles.severityInfo
+    }
+  }
 
   return (
     <div className={styles.root}>
+      {currentDataSet && (
+        <div className={styles.dataSetBanner}>
+          Viewing data set: {currentDataSet.name} ({currentDataSet.industry})
+        </div>
+      )}
+
       <div className={styles.header}>
         <h1 className={styles.title}>Overview</h1>
       </div>
@@ -171,32 +214,32 @@ export function Overview() {
             <Warning24Regular />
             <span>Active Incidents</span>
           </div>
-          <div className={`${styles.statValue} ${styles.statValueDanger}`}>23</div>
+          <div className={`${styles.statValue} ${styles.statValueDanger}`}>{activeIncidents.length}</div>
           <div className={styles.statTrend}>
             <ArrowTrending24Regular />
-            +5 from last week
+            {incidents.length} total incidents
           </div>
         </div>
 
         <div className={styles.statCard}>
           <div className={styles.statHeader}>
             <ShieldCheckmark24Regular />
-            <span>Analytics Rules</span>
+            <span>Active Alerts</span>
           </div>
-          <div className={styles.statValue}>156</div>
+          <div className={styles.statValue}>{alerts.filter(a => a.status !== 'Resolved' && a.status !== 'Dismissed').length}</div>
           <div className={styles.statTrend}>
-            142 enabled
+            {alerts.length} total alerts
           </div>
         </div>
 
         <div className={styles.statCard}>
           <div className={styles.statHeader}>
             <DataUsage24Regular />
-            <span>Data Ingestion</span>
+            <span>Data Connectors</span>
           </div>
-          <div className={`${styles.statValue} ${styles.statValueSuccess}`}>2.4GB</div>
+          <div className={`${styles.statValue} ${styles.statValueSuccess}`}>{connectors.filter(c => c.status === 'connected').length}</div>
           <div className={styles.statTrend}>
-            Last 24 hours
+            {connectors.length} configured
           </div>
         </div>
 
@@ -205,7 +248,7 @@ export function Overview() {
             <Warning24Regular />
             <span>High Severity</span>
           </div>
-          <div className={`${styles.statValue} ${styles.statValueWarning}`}>7</div>
+          <div className={`${styles.statValue} ${styles.statValueWarning}`}>{highSeverityIncidents.length}</div>
           <div className={styles.statTrend}>
             Requires attention
           </div>
@@ -235,34 +278,20 @@ export function Overview() {
       <div className={styles.recentIncidents}>
         <h3 className={styles.chartTitle}>Recent Incidents</h3>
         <div className={styles.incidentList}>
-          <div className={styles.incidentItem}>
-            <div className={`${styles.incidentSeverity} ${styles.severityHigh}`} />
-            <div className={styles.incidentInfo}>
-              <div className={styles.incidentTitle}>Suspicious login from unknown location</div>
-              <div className={styles.incidentMeta}>INC-2024-001 • Created 2 hours ago • Assigned to: John Doe</div>
+          {recentIncidents.map((incident) => (
+            <div key={incident.id} className={styles.incidentItem}>
+              <div className={`${styles.incidentSeverity} ${getSeverityStyle(incident.severity)}`} />
+              <div className={styles.incidentInfo}>
+                <div className={styles.incidentTitle}>{incident.title}</div>
+                <div className={styles.incidentMeta}>
+                  {incident.id} • Created {formatTimeAgo(incident.createdTime)} • {incident.owner || 'Unassigned'}
+                </div>
+              </div>
             </div>
-          </div>
-          <div className={styles.incidentItem}>
-            <div className={`${styles.incidentSeverity} ${styles.severityHigh}`} />
-            <div className={styles.incidentInfo}>
-              <div className={styles.incidentTitle}>Multiple failed authentication attempts</div>
-              <div className={styles.incidentMeta}>INC-2024-002 • Created 4 hours ago • Unassigned</div>
-            </div>
-          </div>
-          <div className={styles.incidentItem}>
-            <div className={`${styles.incidentSeverity} ${styles.severityMedium}`} />
-            <div className={styles.incidentInfo}>
-              <div className={styles.incidentTitle}>Anomalous network traffic detected</div>
-              <div className={styles.incidentMeta}>INC-2024-003 • Created 6 hours ago • Assigned to: Jane Smith</div>
-            </div>
-          </div>
-          <div className={styles.incidentItem}>
-            <div className={`${styles.incidentSeverity} ${styles.severityLow}`} />
-            <div className={styles.incidentInfo}>
-              <div className={styles.incidentTitle}>New device enrolled in network</div>
-              <div className={styles.incidentMeta}>INC-2024-004 • Created 8 hours ago • Closed</div>
-            </div>
-          </div>
+          ))}
+          {recentIncidents.length === 0 && (
+            <div className={styles.incidentMeta}>No incidents to display</div>
+          )}
         </div>
       </div>
     </div>

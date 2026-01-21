@@ -5,6 +5,7 @@ import {
   Save24Regular,
   ArrowDownload24Regular,
 } from '@fluentui/react-icons'
+import { useData } from '../contexts/DataContext'
 
 const useStyles = makeStyles({
   root: {
@@ -70,9 +71,6 @@ const useStyles = makeStyles({
     border: 'none',
     borderRadius: '4px 4px 0 0',
     cursor: 'pointer',
-    ':hover': {
-      backgroundColor: '#323130',
-    },
   },
   editorTabActive: {
     backgroundColor: '#1e1e1e',
@@ -86,18 +84,8 @@ const useStyles = makeStyles({
     color: '#d4d4d4',
     lineHeight: '1.5',
   },
-  lineNumbers: {
-    color: '#858585',
-    userSelect: 'none',
-    paddingRight: '12px',
-    borderRight: '1px solid #323130',
-    marginRight: '12px',
-  },
   keyword: {
     color: '#569cd6',
-  },
-  string: {
-    color: '#ce9178',
   },
   operator: {
     color: '#d4d4d4',
@@ -152,9 +140,6 @@ const useStyles = makeStyles({
     gap: '12px',
     padding: '10px 16px',
     borderBottom: '1px solid #323130',
-    ':hover': {
-      backgroundColor: '#252423',
-    },
   },
   tableCell: {
     fontSize: '13px',
@@ -182,9 +167,6 @@ const useStyles = makeStyles({
     borderRadius: '4px',
     fontSize: '13px',
     color: '#d2d0ce',
-    ':hover': {
-      backgroundColor: '#323130',
-    },
   },
   mainContent: {
     display: 'flex',
@@ -200,15 +182,6 @@ const useStyles = makeStyles({
   },
 })
 
-const mockResults = [
-  { timestamp: '2024-01-15 14:32:15', level: 'Warning', computer: 'WS-PC-001.contoso.com', account: 'john.doe@contoso.com', message: 'Failed login attempt detected' },
-  { timestamp: '2024-01-15 14:31:42', level: 'Error', computer: 'DC-01.contoso.com', account: 'admin@contoso.com', message: 'Account lockout triggered' },
-  { timestamp: '2024-01-15 14:30:18', level: 'Information', computer: 'WS-PC-002.contoso.com', account: 'jane.smith@contoso.com', message: 'Successful authentication' },
-  { timestamp: '2024-01-15 14:29:55', level: 'Warning', computer: 'SRV-APP-01.contoso.com', account: 'service_account', message: 'Certificate expiring soon' },
-  { timestamp: '2024-01-15 14:28:33', level: 'Error', computer: 'WS-PC-003.contoso.com', account: 'mike.wilson@contoso.com', message: 'Malware detected and quarantined' },
-  { timestamp: '2024-01-15 14:27:12', level: 'Information', computer: 'DC-02.contoso.com', account: 'SYSTEM', message: 'Group policy applied successfully' },
-]
-
 const tables = [
   'SecurityEvent',
   'SigninLogs',
@@ -220,8 +193,19 @@ const tables = [
   'Heartbeat',
 ]
 
+function formatTimestamp(dateString: string): string {
+  const date = new Date(dateString)
+  return date.toISOString().replace('T', ' ').substring(0, 19)
+}
+
 export function Logs() {
   const styles = useStyles()
+  const { securityEvents } = useData()
+
+  // Sort events by time, most recent first
+  const sortedEvents = [...securityEvents]
+    .sort((a, b) => new Date(b.timeGenerated).getTime() - new Date(a.timeGenerated).getTime())
+    .slice(0, 100) // Limit to 100 for display
 
   return (
     <div className={styles.root}>
@@ -304,7 +288,7 @@ export function Logs() {
           <div className={styles.resultsSection}>
             <div className={styles.resultsHeader}>
               <div className={styles.resultsInfo}>
-                Results: 6 rows returned in 0.234s
+                Results: {sortedEvents.length} rows returned
               </div>
               <div className={styles.toolbarRight}>
                 <Button appearance="subtle" size="small">Columns</Button>
@@ -315,21 +299,27 @@ export function Logs() {
             <div className={styles.resultsTable}>
               <div className={styles.tableHeader}>
                 <div className={styles.tableHeaderCell}>TimeGenerated</div>
-                <div className={styles.tableHeaderCell}>Level</div>
+                <div className={styles.tableHeaderCell}>EventID</div>
                 <div className={styles.tableHeaderCell}>Computer</div>
                 <div className={styles.tableHeaderCell}>Account</div>
-                <div className={styles.tableHeaderCell}>Message</div>
+                <div className={styles.tableHeaderCell}>Activity</div>
               </div>
 
-              {mockResults.map((row, index) => (
-                <div key={index} className={styles.tableRow}>
-                  <div className={styles.tableCell}>{row.timestamp}</div>
-                  <div className={styles.tableCell}>{row.level}</div>
-                  <div className={styles.tableCell}>{row.computer}</div>
-                  <div className={styles.tableCell}>{row.account}</div>
-                  <div className={styles.tableCell}>{row.message}</div>
+              {sortedEvents.map((event) => (
+                <div key={event.id} className={styles.tableRow}>
+                  <div className={styles.tableCell}>{formatTimestamp(event.timeGenerated)}</div>
+                  <div className={styles.tableCell}>{event.eventID}</div>
+                  <div className={styles.tableCell}>{event.computer}</div>
+                  <div className={styles.tableCell}>{event.account}</div>
+                  <div className={styles.tableCell}>{event.activity}</div>
                 </div>
               ))}
+
+              {sortedEvents.length === 0 && (
+                <div style={{ padding: '24px', textAlign: 'center', color: '#a19f9d' }}>
+                  No log entries to display. Run a query to see results.
+                </div>
+              )}
             </div>
           </div>
         </div>

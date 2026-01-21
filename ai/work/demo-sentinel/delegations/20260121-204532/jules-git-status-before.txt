@@ -1,0 +1,6 @@
+ M frontend/src/pages/Incidents.tsx
+ M frontend/src/pages/Logs.tsx
+ M frontend/src/pages/Overview.tsx
+?? frontend/src/contexts/DataContext.tsx
+?? frontend/src/data/
+?? frontend/src/types/

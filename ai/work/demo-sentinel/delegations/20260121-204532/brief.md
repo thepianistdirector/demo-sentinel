@@ -1,0 +1,28 @@
+# Delegation Brief: Add Loading State to Overview Page
+
+## Task
+Add a loading spinner to the Overview page (`frontend/src/pages/Overview.tsx`) that shows while data is being fetched.
+
+## Requirements
+
+1. Import `Spinner` from `@fluentui/react-components`
+2. Add a `isLoading` state variable using `useState`, initialized to `true`
+3. Add a `useEffect` that sets `isLoading` to `false` after 1 second (simulating data fetch)
+4. When `isLoading` is true, render a centered Spinner with label "Loading dashboard..."
+5. When `isLoading` is false, render the existing content
+
+## Acceptance Criteria
+- [ ] Spinner shows on initial page load
+- [ ] After 1 second, spinner disappears and content shows
+- [ ] No TypeScript errors
+- [ ] Build passes (`pnpm build`)
+
+## Technical Context
+- Project uses React 18 with TypeScript
+- UI framework: Fluent UI v9 (@fluentui/react-components)
+- Build tool: Vite
+
+## Constraints
+- No stubs or placeholders
+- Must be fully functional
+- Run `pnpm build` to verify no errors

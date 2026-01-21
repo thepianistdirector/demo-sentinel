@@ -1,0 +1,6 @@
+ai/reviews/command-log.jsonl
+ai/work/demo-sentinel/delegations/20260121-203439/codex.attempt.log
+ai/work/demo-sentinel/delegations/20260121-203439/codex.stderr.log
+ai/work/demo-sentinel/delegations/20260121-203525/_tooling/github-preflight.stderr.log
+ai/work/demo-sentinel/delegations/20260121-203525/_tooling/github-preflight.stdout.log
+ai/work/demo-sentinel/delegations/20260121-203525/jules.stderr.log
