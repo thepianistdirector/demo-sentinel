@@ -1,0 +1,8 @@
+# Repo meta
+ROOT=/home/lucas/code/demo-sentinel
+ORIGIN=https://github.com/thepianistdirector/demo-sentinel.git
+BRANCH=master
+COMMIT=c9511f9099bb03b94216db0ee5e68a7340c26e29
+ACTIVE_DIR=ai/work/demo-sentinel
+TIMESTAMP=20260121-202844
+DELEG_DIR_REL=ai/work/demo-sentinel/delegations/20260121-202844

@@ -1,0 +1,7 @@
+ai/decisions.md
+ai/reviews/command-log.jsonl
+ai/work/demo-sentinel/delegations/20260121-202357/gemini.attempt.log
+ai/work/demo-sentinel/delegations/20260121-202357/gemini.stderr.log
+ai/work/demo-sentinel/delegations/20260121-202530/_tooling/github-preflight.stderr.log
+ai/work/demo-sentinel/delegations/20260121-202530/_tooling/github-preflight.stdout.log
+ai/work/demo-sentinel/delegations/20260121-202530/jules.stderr.log

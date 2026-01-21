@@ -28,3 +28,35 @@
 - Use git hooks to detect changes (rejected: adds dependencies)
 
 **Files:** `~/.local/share/claude-code/scripts/ai/delegate*.sh`
+
+---
+
+## 2026-01-21: Verification Refinements
+
+**Context:** Initial verification implementation had false positives due to:
+1. Delegation artifacts being counted as "work"
+2. Jules preflight commits being counted as "work"
+3. BEFORE snapshot being taken once instead of per-engine
+
+**Decision:** Implement multi-layer verification with specific exclusions.
+
+**Changes:**
+1. BEFORE snapshot taken immediately before EACH engine runs
+2. Preflight commits (message contains "preflight") explicitly excluded from work detection
+3. Directories excluded from status comparison:
+   - `ai/delegations/`
+   - `ai/reviews/`
+   - `ai/work/*/delegations/`
+   - Current delegation directory
+4. File count comparison instead of raw string comparison
+
+**Tradeoffs:**
+- (+) No more false positives from preflight commits or artifacts
+- (+) Each engine evaluated independently against its own baseline
+- (-) Slightly more complex verification logic
+- (-) Preflight commits always ignored (can't use them as work indicator)
+
+**Verification Criteria:**
+- New non-preflight commit created
+- More files in working tree (outside excluded dirs)
+- Different files in status (actual new content)
