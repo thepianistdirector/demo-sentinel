@@ -1,0 +1,9 @@
+>> Trying: codex --prompt "$PROMPT"
+error: unexpected argument '--prompt' found
+
+  tip: to pass '--prompt' as a value, use '-- --prompt'
+
+Usage: codex [OPTIONS] [PROMPT]
+       codex [OPTIONS] <COMMAND> [ARGS]
+
+For more information, try '--help'.

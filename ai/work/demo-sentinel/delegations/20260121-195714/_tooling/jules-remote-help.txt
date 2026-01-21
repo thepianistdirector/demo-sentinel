@@ -1,0 +1,17 @@
+Interact with remote sessions, e.g. new/list/pull
+
+Usage:
+  jules remote [command]
+
+Available Commands:
+  list        List remote sessions or repos
+  new         Assign a new session to Jules in a remote VM
+  pull        Pull the result of a remote session
+
+Flags:
+  -h, --help   help for remote
+
+Global Flags:
+      --theme string   Which theme to use, dark/light (default "dark")
+
+Use "jules remote [command] --help" for more information about a command.

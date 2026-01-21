@@ -1,0 +1,7 @@
+# Repo meta
+ROOT=/home/lucas/code/demo-sentinel
+ORIGIN=
+BRANCH=
+COMMIT=
+ACTIVE_DIR=ai/work/demo-sentinel
+TIMESTAMP=20260121-195714
