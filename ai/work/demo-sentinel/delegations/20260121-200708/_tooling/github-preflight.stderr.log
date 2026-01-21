@@ -3,3 +3,9 @@
 [preflight] Origin not set or not GitHub, will create/set
 [preflight] Created repository: https://github.com/thepianistdirector/demo-sentinel
 [preflight] Staging 3 files for preflight commit
+[preflight] Push failed: error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/thepianistdirector/demo-sentinel.git'
+
+[preflight] Warning: push failed, but continuing
+[preflight] Report written to /home/lucas/code/demo-sentinel/ai/work/demo-sentinel/delegations/20260121-200708/_tooling/github-preflight.json
+[preflight] Preflight complete
